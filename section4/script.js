@@ -1,5 +1,20 @@
+/*
+
+LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
+98. hoisting w JavaScript
+99. Temporal Dead Zone
+101. Mutowalność i niemutowalność w JavaScript
+102. Number - metody i właściwości
+103. String - metody i właściwości
+104. Array - tablice - metody i właściwości
+105. Array - tablice - metody i właściwości - część 2
+106. Array - tablice - metody map filter reduce every
+*/
+
 
 //98. hoisting w JavaScript
+console.log('98. hoisting w JavaScript')
+
 /*
 Hoisting to przepisanie wszystkich deklaracji zmiennych na początek funkcji,
 natomiast przypisania wartości pozostają na swoim miejscu.
@@ -31,6 +46,8 @@ test1()
 
 
 //99. Temporal Dead Zone
+console.log('99. Temporal Dead Zone')
+
 /*
 Poza blokiem zmienna let może być używana , ale gdy wewnątrz istnieje deklaracja
  let z tą samą nazwą  to powstaje przestrzeń, gdzie zmienna z poza bloku
@@ -47,6 +64,8 @@ Poza blokiem zmienna let może być używana , ale gdy wewnątrz istnieje deklar
 
 
 //101. Mutowalność i niemutowalność w JavaScript
+console.log('101. Mutowalność i niemutowalność w JavaScript')
+
 /*
 W JS tylko obiejty i tablice tak naprawdę nadpisują
 swoją wartość, czyli są mutowalne. Natomiast prymitywy,
@@ -66,6 +85,8 @@ console.log(arr) //[11,2,3,4,5]
 
 
 //102. Number - metody i właściwości
+console.log('102. Number - metody i właściwości')
+
 console.log(Number.parseFloat("111.33")) //111.33 = number
 console.log(Number.parseInt("12323")) //12323 = number
 console.log(Number.isInteger(33)) //true
@@ -85,6 +106,8 @@ console.log(1233.3333.toFixed(2)) //1233.33 obcina liczbę po przecinku
 
 
 //103. String - metody i właściwości
+console.log('103. String - metody i właściwości')
+
 let strString = 'Hello world'
 strString.toLowerCase()
 strString.toUpperCase()
@@ -118,4 +141,126 @@ strString.lastIndexOf("Karolina") // zwraca -1 . Oznacza że nie ma takiego w la
 //zwraca nam lańcuch od indeksu gdzie znajduje się nasze słowko Kasia
 let str2 = strString.substring(strString.lastIndexOf("Kasia"))
 console.log(str2)//Kasia ma psa
+
+
+
+
+//104. Array - tablice - metody i właściwości
+console.log('104. Array - tablice - metody i właściwości')
+
+let arr2 = [1,2,3,4,5,6]
+let tab = new Array (1,2,3,4,5, {a:12},[],'123')
+
+tab = [
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]
+];
+
+tab = [
+  {name: "Kasia" , favColor: 'red'},
+  {name: "Asia" , favColor: 'white'},
+  {name: "Vasia" , favColor: 'yellow'}
+]
+tab[0] = {name: "Karolina", favColor:'black'}
+
+tab = [1,2,3,4,5,6]
+tab.push(12) // dodajemy na koniec
+tab.pop()//kasuje ostatni element
+tab.reverse() //odwraca tabele
+tab = tab.concat([12,23,33]) // połącza tebeli
+
+let tab2 = tab.join("-|-")
+console.log(tab2)//6-|-5-|-4-|-3-|-2-|-1-|-12-|-23-|-33
+
+tab = new Array(7)
+console.log(tab)//[empty × 7] Tablica ma siedem elementów ale one są puste(ma miejsce dla elementów ale ich nie posiada)
+
+tab = new Array(7).fill(5) //[5,5,5,5,5,5,5] Stworzyli tablice które zawiera 7 pustych miejsc i uzupewnili ich liczbą 5
+
+//przchodzimy po wszystkich elementach w tablice
+tab = [ "Ania", "Olia", "Kasia"]
+//1 sposób
+for (let i = 0; i <= tab.length; i++){
+  const el = tab[i]
+}
+//2 sposób
+for (let el of tab){
+  console.log(el)
+}
+//3 sposób
+tab.forEach((item, index, arr)=>{
+  console.log(item, index,arr)
+})
+
+
+
+
+//105. Array - tablice - metody i właściwości - część 2
+console.log('105. Array - tablice - metody i właściwości - część 2')
+
+tab = [ "Ania", "Olia", "Kasia", "Karol", "Daniel"]
+//szuka element i zwraca index w którym znajduje się ten element
+let pos = tab.indexOf("Adam")//-1
+pos = tab.indexOf("Ania")//0
+//szuka od końca tablicy
+tab.lastIndexOf("Ania")
+
+//zwraca true lub false
+tab.includes("Zuza")//false, nie ma takiego elementu
+
+//sortowanie
+tab.sort()
+
+//sortować odwrotnie to
+tab.sort().reverse()
+
+//sortowanie liczb
+tab = [22, 33,1,3,55,1,332]
+tab = tab.sort((a,b)=> a-b)
+console.log(tab)
+
+//dodawanie elementów na początek tablicy
+tab.unshift(-3,-2,-1,0)
+console.log(tab)
+
+//shift MODYFIKUJE NASZĄ TABLICE
+let firstEl = tab.shift()//-3
+console.log(firstEl)
+console.log(tab)// [-2, -1, 0, 1, 1, 3, 22, 33, 55, 332]
+
+//splice
+/*
+[].splice(start, deleteCount, item1, item2)
+Metoda splice pozwala na skasowanie i dodanie za jednym
+razem kilku elementów do tablicy. start określa od którego numeru indeksu zrobić
+zmianę, deleteCount - ile skasować elementów, a resztaparametrów to nowe elementy do dodania.
+Funkcja ta modyfikuje tablicę i zwraca skasowane elementy
+*/
+//drugi argument 0 oznacza że nic nie kasujemy z tabeli
+tab.splice(2, 0, "ola",3,4,5)
+console.log(tab)
+
+
+
+//106. Array - tablice - metody map filter reduce every
+console.log('106. Array - tablice - metody map filter reduce every')
+
+//map
+let tabMap = [1,2,3,4,5,6]
+let newMap = tabMap.map((el)=> el +5)
+console.log(newMap)//[6, 7, 8, 9, 10, 11]
+
+//filter
+let filtered;
+filtered = newMap.filter((el) => el < 8)
+console.log(filtered)//[6, 7]
+
+//reduced
+let redUce = filtered.reduce((acc,currendValue, index, arr)=>(acc+ currendValue))
+console.log(redUce)//13
+
+//every zwraca informacj czy wszystkie elementy wspewniają warunerk (zwraca true lub false)
+const eVery = newMap.every(el =>el > 0)
+console.log(eVery)//true
 
