@@ -80,3 +80,42 @@ console.log(Math.floor(14.99)) //15 Okrągla do dołu
 
 console.log(Math.random()) //generuje randomową liczbę
 console.log(1233.3333.toFixed(2)) //1233.33 obcina liczbę po przecinku
+
+
+
+
+//103. String - metody i właściwości
+let strString = 'Hello world'
+strString.toLowerCase()
+strString.toUpperCase()
+console.log(strString.charAt(0)) //H
+console.log(strString.charCodeAt(0))//72 zwraca unikod naszego symbolu z tabeli "unicode table"
+
+strString = "a b c b d b e"
+console.log(strString.split(' ')) //['a', 'b', 'c', 'b', 'd', 'b', 'e']
+
+strString = "1 2 3 4 5 6"
+strString = strString.split(' ').join('|') //['1', '2', '3', '4', '5', '6']
+console.log(strString) //1|2|3|4|5|6
+
+strString = "A B C D EF D D D S D"
+strString = strString.replace("D", "test")
+console.log(strString)//A B C test EF D D D S D
+
+strString = strString.replace(/D/g, "TEST")
+console.log(strString)//A B C test EF TEST TEST TEST S TEST  //podmienia wszystkie D na TEST
+//pobieranie fragmentów łańcucha, substring(odkąd, dokąd -1)
+strString = '012345'
+strString.substring(2) //'2345' zwraca od indeksu 2
+strString.substring(2,5)
+
+strString = "Kasia ma kota, Kasia ma psa"
+strString.indexOf("Kasia")//0 szukaj od początku lańcucha
+console.log(strString.indexOf("Kasia", 2))// szukaj od 2 go indeksu. Resultat: substr . Element znajduje sie pod indeksem 15
+strString.lastIndexOf("Kasia")//15 szuka od końca lańcucha
+strString.lastIndexOf("Karolina") // zwraca -1 . Oznacza że nie ma takiego w lańcucha wewnątrz lańcucha znaków
+
+//zwraca nam lańcuch od indeksu gdzie znajduje się nasze słowko Kasia
+let str2 = strString.substring(strString.lastIndexOf("Kasia"))
+console.log(str2)//Kasia ma psa
+
