@@ -4,6 +4,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 
 107. Object - metoda assign
 108. Object - enumeracja kluczy i wartości
+109. Object - serializacja danych
 */
 
 
@@ -59,3 +60,37 @@ console.log(objEntries)
 for(const [key, value] of objEntries){
   console.log(key, value)
 }
+
+
+
+//109. Object - serializacja danych
+console.log('109. Object - serializacja danych')
+
+/*
+Serializacja to zapisanie obiektu oraz jego właściwości
+w takim stanie aby taki obiekt mógł być póżniej łatwo
+odtworzony
+*/
+
+let source ={
+  str: "Hello",
+  a: 24,
+  data:{
+    b:111,
+    arr: [1,2,3,4,5]
+  },
+  date: new Date()
+}
+let strData = JSON.stringify(source)
+console.log(strData) //{"str":"Hello","a":24,"data":{"b":111,"arr":[1,2,3,4,5]},"date":"2023-11-24T07:49:46.350Z"}
+
+let otherObj = JSON.parse(strData);
+console.log(otherObj) //{str: 'Hello', a: 24, data: {…}, date: '2023-11-24T07:51:18.515Z'}
+
+//prawidłowa data w formie obiektu
+otherObj.date = new Date(otherObj.date)
+console.log(otherObj)//{str: 'Hello', a: 24, data: {…}, date: Fri Nov 24 2023 08:52:23 GMT+0100 (Central European Standard Time)}
+console.log(otherObj.date instanceof Date) //true - podtwiedzenie że data jest prawidłowa
+
+//za pomocą JSON.stringify i JSON.parse możemy stworzyć kopije obiektu
+console.log(source.data === otherObj.data)//false więc mamy Deepth copije
