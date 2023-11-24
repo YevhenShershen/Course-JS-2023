@@ -5,6 +5,8 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 107. Object - metoda assign
 108. Object - enumeracja kluczy i wartości
 109. Object - serializacja danych
+110. Object - defineProperty
+111. call apply bind
 */
 
 
@@ -94,3 +96,54 @@ console.log(otherObj.date instanceof Date) //true - podtwiedzenie że data jest 
 
 //za pomocą JSON.stringify i JSON.parse możemy stworzyć kopije obiektu
 console.log(source.data === otherObj.data)//false więc mamy Deepth copije
+
+
+
+//Odtwarzaj 110. Object - defineProperty
+console.log('Odtwarzaj 110. Object - defineProperty')
+
+let obj12 = {
+  a:12,
+  b:13
+}
+obj12.c=14;
+//value = wartość właściwości
+//writable = czy można modyfikować wartość tej właściwości
+//configurable = czy można skasować tą właściwość
+//enumerable = czy można enumerować tą właściwość
+Object.defineProperty(obj12, 'prop', {
+  value: "test",
+writable: true,
+configurable: false,
+enumerable:true
+})//{a: 12, b: 13, c: 14, prop: 'test'}
+console.log(obj12)
+delete obj12.prop//{a: 12, b: 13, c: 14, prop: 'test'} nie możemy skasować
+console.log(obj12)
+
+
+
+
+//111. call apply bind
+console.log('111. call apply bind')
+
+const employee = {
+  name: "Ola",
+  printInfo: function( surname, city){
+  console.log(this.name,surname, city)
+  }
+}
+employee.printInfo("Kowalska", "Warszawa")//Ola Kowalska Warszawa
+const user = {name: "Adam"}
+
+//bieżemy metode printInfo z obiektu employee i za pomocą call wskazujemy w którym objekcie chcemy ją wyłować
+employee.printInfo.call(user, "Adamski", "Krk")//po przecinku możemy dodac dodatkowe argumenty
+//wynik Adam Adamski Krk
+
+employee.printInfo.apply(user, ["Adamski", "Gd"])//po przecinku możemy dodac dodatkowe argumenty
+//wynik Adam Adamski Gd
+
+//tworzymy zmienną której przepisujemy funkcje która bedzie wywowyłana na obiekcie user
+let userInfo = employee.printInfo.bind(user, "Kowalska", "Szczecin")
+userInfo()
+//wynik Adam Adamski Szczecin
