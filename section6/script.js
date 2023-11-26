@@ -7,6 +7,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 129. ES6 parametr rest
 130. ES6 spread operator
 131. ES6 Przypisanie destrukturyzujące
+132. ES6 Pętla for
 */
 
 
@@ -182,3 +183,44 @@ const {employment:{address:{country}}} = employee //Poland
 //wyciągamy z właściwości 'street' i przepisujemy wartość do zmiennej 'companyStreet'
 const {employment:{address:{street: companyStreet = "Wilcza"}} }= employee
 console.log(companyStreet)//Polna
+
+
+//132. ES6 Pętla for
+console.log("132. ES6 Pętla for")
+
+const tab1 = [1,2,3,4,5,6,7]
+for (let el of tab1){
+  console.log(el)
+}
+const str = 'text'
+for (let el of str){
+  console.log(el)
+}
+
+const map1 = new Map()
+map1.set("test", {id:1, content:'text'})
+const car = {car: 'GMC'}
+map1.set(car, {topSpeed:200})
+
+console.log(map1.get("test"))//{id: 1, content: 'text'}
+console.log(map1.get(car))//{topSpeed: 200}
+
+
+for( const entry of map1){
+  console.log(entry)//['test', {…}], [{…}, {…}]
+}
+for (const [key, value] of map1){
+  console.log(key , value)
+  //test {id: 1, content: 'text'}
+  //{car: 'GMC'} {topSpeed: 200}
+}
+
+const set = new Set([1,2,3,4,55,121])
+for (const v of set){
+  console.log(v)
+}
+
+const elementsSpan = document.querySelectorAll("span")
+for (const el of elementsSpan){
+  el.innerHTML = "Add text to Span"
+}
