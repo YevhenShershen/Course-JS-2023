@@ -192,9 +192,9 @@ const urlChuck = 'https://api.chucknorris.io/jokes/random'
 window.onload = function (){
   let div = document.querySelector('#joke')
   setInterval(() => getJoke((data)=>{
-    console.log(data);
+    // console.log(data);
     div.innerHTML = data.value
-  }),2000)
+  }),10000)
 }
 
 function getJoke(callback){
