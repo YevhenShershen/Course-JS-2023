@@ -8,6 +8,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 130. ES6 spread operator
 131. ES6 Przypisanie destrukturyzujące
 132. ES6 Pętla for
+133. ES6 Pętla for of kontra for in
 */
 
 
@@ -224,3 +225,38 @@ const elementsSpan = document.querySelectorAll("span")
 for (const el of elementsSpan){
   el.innerHTML = "Add text to Span"
 }
+
+
+
+//133. ES6 Pętla for of kontra for in
+console.log('133. ES6 Pętla for of kontra for in')
+
+const arr = [12,20,110]
+delete arr[1]
+//Pokazuje wartości
+for (const v of arr){
+  console.log(v) //12,undefined,110
+}
+//Pokazuje indeksy
+for( const k in arr){
+  console.log(k)//0, 2, 3
+}
+
+
+const obj2 = {
+  a:10,
+  txt:"text"
+}
+
+Object.defineProperty(obj2, "nazwa_property",{
+  value:45,
+  configuration:true, // czy można skasować property
+  writable:false, // czy można nadpisać wartość
+  enumerable: false
+})
+console.log(obj2)//{a: 10, txt: 'text', nazwa_property: 45}
+
+//(nazwa_property nie jest wyszwietlana przez to że mamy właściwość enumerable:false)
+for(const v in obj2)  console.log('For in object',v) // a txt
+
+for (const v of Object.values(obj2)) console.log(v) //10 txt
