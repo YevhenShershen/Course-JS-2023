@@ -4,6 +4,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 
 127. ES6 deklaracja zmiennych z let oraz stałych z const
 128. ES6 funkcje strzałkowe
+129. ES6 parametr rest
 */
 
 
@@ -64,3 +65,14 @@ let objTest2 ={
   }
 }
 objTest2.foo()
+
+
+
+//129. ES6 parametr rest
+console.log('129. ES6 parametr rest')
+
+const testRest = (...params) =>console.log(params)
+testRest(1,2,3,4,5)
+
+//jeżeli chcemy użyć rest w funkcji która zawiera argumenty to używamy go na końcu argumentów
+const restFoo = (a, b, ...params) => {}
