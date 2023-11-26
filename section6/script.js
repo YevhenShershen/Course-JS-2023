@@ -6,6 +6,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 128. ES6 funkcje strzałkowe
 129. ES6 parametr rest
 130. ES6 spread operator
+131. ES6 Przypisanie destrukturyzujące
 */
 
 
@@ -112,3 +113,72 @@ const tasksList =[
 
 const newTasksList = [...tasksList, {name:"Task 4", completed: true}]
 console.log(newTasksList)
+
+
+
+//131. ES6 Przypisanie destrukturyzujące (destructuring)
+console.log('131. ES6 Przypisanie destrukturyzujące')
+
+//przepisywanie do zmiennych num, name, obj
+const [num, name, obj] = [12, "Ania", {b:6}]
+console.log(num);
+
+//używamy tych samych nazw dla destrukturyzacji
+const {username, age, city ="KRK"} = {username: "Ola", age: 30}
+console.log(username)//Ola
+console.log(city)//KRK
+
+//jeżeli chcemy pominąć jakiś elementy z tablicy (, ,)
+const[f, ,h] = [1,3,55]
+console.log(f,h)
+
+//
+function gerUserData(){
+  const userCity = "Wawa";
+  const street = "Wilcza"
+  return {
+    //Zapis skrócony
+    //nazwa właściwości będzie taka sama jak i pobrana nazwa (userCity:userCity)
+    userCity,
+    street
+  }
+}
+const userData1 = gerUserData()
+console.log(userData1)//{userCity: 'Wawa', street: 'Wilcza'}
+
+const {userCity, street} = userData1
+
+
+const userDetails = {
+  name: "Karol",
+  age: 22,
+  city: "Gdańsk"
+}
+//wyciągamy tylko dwie właściwości z naszego obiektu
+function printUser({city, name}){
+console.log(city, name)//Gdańsk Karol
+}
+printUser(userDetails)
+
+
+//wyciąganie zagnieżdżonych właściwości z obiektu
+const employee = {
+  name: "Ola",
+  id:32,
+  employment:{
+    company: "example.com",
+    address:{
+      country: "Poland",
+      street: "Polna"
+    }
+  }
+}
+
+const {id, employment:{company}}  = employee //id, company
+console.log(id, company) //32 'example.com'
+const {employment:{address:{country}}} = employee //Poland
+
+//Jeżeli właścowości nie bedzie w obiekcie to przepisze dane które my ustawiliśmy
+//wyciągamy z właściwości 'street' i przepisujemy wartość do zmiennej 'companyStreet'
+const {employment:{address:{street: companyStreet = "Wilcza"}} }= employee
+console.log(companyStreet)//Polna
