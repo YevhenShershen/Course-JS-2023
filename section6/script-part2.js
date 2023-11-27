@@ -4,6 +4,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 
 134. ES6 Map - przechowywanie danych jako klucz wartość
 135. ES6 Set - przechowywanie unikalnych prymitywów i referencji do obiektów
+136. ES6 Klasy wprowadzenie
 */
 
 
@@ -70,3 +71,61 @@ let arr2 = [...set1]
 console.log(arr, arr2)//[2, NaN, {…}]    [2, NaN, {…}]
 
 const set2 = new Set([...set1, 11, 22, 33, function(){}])
+
+
+
+//136. ES6 Klasy wprowadzenie
+console.log('136. ES6 Klasy wprowadzenie')
+//klasy zawsze w strict mode
+class Car {
+  constructor(name, year){
+      this.name = name;
+      this.year = year;
+  }
+  pritn(){
+    console.log(this.name, this.year)
+  }
+}
+
+const car1 = new Car("dodge",3333)
+car1.pritn()//dodge 3333
+
+let Animal = class BasicAnimal{
+  constructor(name){
+    this.name = name
+    this._age = 1
+//Czy w ES6 jest wspierany prze język statyczne property? - NIE ale możemy to emulować
+   if(Animal.count === undefined) Animal.count = 0;
+   Animal.count++;//emulujemy statyczne property w ES6
+  }
+  getName =()=>{
+    return this.name
+  }
+  set age(value){
+    if(value > 0) this._age = value // nie możemy dać nazwę age bo wtedy wywowujemy setter age dla tego piszemy _age
+  }
+  get age(){
+    return this._age;
+  }
+  //static method
+  static getNewAnimal(){
+    return new Animal("Default animal")
+  }
+  //static method
+  static getAnimalCount(){
+    return Animal.count
+  }
+}
+
+const animal1 = new Animal("Tiger")
+console.log(animal1.getName())//Tiger
+console.log(Animal.name)// nazwa klasy BasicAnimal
+animal1.age = 10
+console.log(animal1.age)//10
+
+const animal2 = Animal.getNewAnimal()
+console.log(animal2.getName())//Default animal
+
+console.dir(Animal)
+
+console.log(Animal.getAnimalCount())//2
