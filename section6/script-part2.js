@@ -5,6 +5,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 134. ES6 Map - przechowywanie danych jako klucz wartość
 135. ES6 Set - przechowywanie unikalnych prymitywów i referencji do obiektów
 136. ES6 Klasy wprowadzenie
+137. ES6 Klasy - rozszerzanie klas z extends i super
 */
 
 
@@ -129,3 +130,45 @@ console.log(animal2.getName())//Default animal
 console.dir(Animal)
 
 console.log(Animal.getAnimalCount())//2
+
+
+
+//137. ES6 Klasy - rozszerzanie klas z extends i super
+console.log('137. ES6 Klasy - rozszerzanie klas z extends i super')
+
+class Animal2{
+  constructor(name){
+    this.name = name;
+
+    if(Animal2.count === undefined) Animal2.count = 0
+    this.id = Animal2.count;
+    Animal2.count++;
+
+    this._type = "animal";
+  }
+set type(str){
+  if(typeof str === "string")this._type = str
+}
+get type(){
+  return this._type
+}
+printName(){
+  console.log("Animal",this.name)
+}
+}
+
+class Human extends Animal2 {
+//jeżeli rozszerzamy jakąś klase to powinni dodać do konstruktor funkcje 'super()'
+  constructor(name){
+    super(name)
+}
+//przesłaniamy metodę printName w Animal2
+printName(){
+  super.printName();// odłowujemy się do metody printName w klasie Animal2 //Animal Olek
+  console.log("Human",this.name) //Human Olek
+}
+}
+
+const human1 = new Human("Olek");
+human1.printName();//Olek
+console.log(Animal2.count)//1
