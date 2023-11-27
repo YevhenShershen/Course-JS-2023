@@ -4,6 +4,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 
 139. ES6 Symbol - primityw
 140. ES6 Domyślne parametry funkcji
+141. ES6 Literały szablonu i tagi oraz nowości w String
 */
 
 
@@ -71,3 +72,38 @@ console.log(a, b)
 test6({a:13, b:33})//13 33
 test6({a:13})//13 2
 test6()//1 2
+
+
+
+//141. ES6 Literały szablonu i tagi oraz nowości w String
+console.log('141. ES6 Literały szablonu i tagi oraz nowości w String')
+
+const user = {name: "Ania", city: "Wawa"}
+const txt = `Hello ${user.name} from ${user.city}. ${2+2}`
+console.log(txt)
+
+function uppercase (strings, ...values){
+  console.log(strings)
+  console.log(values)
+
+  let result =""
+  for(let i = 0; i < strings.length; i++){
+    result += strings[i];
+   if(i < values.length) {
+    let v = values[i]
+    if(typeof v === 'string') v = v.toUpperCase()
+    result += v
+  }
+  }
+  return result
+}
+const txt2 = uppercase`
+Hello ${user.name}  from ${user.city}. ${2+2}
+`
+console.log(txt2)
+
+
+const text = "Hello world!"
+console.log(text.includes("world"))//true  czy zawiera lańcuch znaków to słowo
+console.log(text.startsWith("Hello"))//true  od czego zaczyna się lańcuch znaków
+console.log(text.endsWith("world!"))//true od końca
