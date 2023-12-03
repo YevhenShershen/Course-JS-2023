@@ -27,6 +27,29 @@
   <!-- <script src="./section5/event-loop.js"></script> -->
   <script src="/section6/script-part4.js"></script>
   <!-- <script src="tasks.js"></script> -->
+
+  <!-- MODUŁY -->
+  <script type="module" src="./section6/modules.js"></script>
+  <script type="module">
+    import * as myModule from "./section6/modules.js"
+    console.log(myModule.testValue)//test
+    console.log(myModule.add(33,44))//77
+    console.log(myModule.newArr)//77
+
+    import {newArr, add as additional} from './section6/modules.js'
+    console.log('newArr', newArr)
+    console.log(additional(3,22))//25
+
+    import myDefault from './section6/modules.js'
+    console.log(myDefault)//{value: 'Hello world', getData: ƒ}
+
+    import defaultExport, {multiply, testValue as testData} from './section6/modules.js'
+    console.log(defaultExport)//{value: 'Hello world', getData: ƒ}
+    console.log(multiply(3,4), testData)//12 'test'
+    // testValues = "test change" // Uncaught ReferenceError: testValues is not defined
+    myModule.setTestValue("test change")
+    console.log(testData)//test change
+  </script>
 </html>
 <style>
 

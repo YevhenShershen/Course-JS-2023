@@ -28,3 +28,4 @@ console.log(isFinite(10/1))//true
 console.log(isFinite(10/0))//false
 console.log(isNaN(10))//false
 console.log(isNaN(NaN))//true
+
