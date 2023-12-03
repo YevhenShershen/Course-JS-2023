@@ -36,3 +36,5 @@ console.log(info)//true (sprawdza wszyskie elementy czy one spewniają warunek)
 
 const atLeastOne = numbers.some(el => el > 7)
 console.log(atLeastOne)//false (sprawdza wszyskie elementy czy choć jeden  spewniają warunek)
+
+
