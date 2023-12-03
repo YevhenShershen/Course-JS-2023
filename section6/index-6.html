@@ -23,27 +23,29 @@
 <span></span><span></span><span></span>
     </div>
   </body>
-
-  <!-- <script src="./section5/event-loop.js"></script> -->
-  <script src="/section6/script-part4.js"></script>
-  <!-- <script src="tasks.js"></script> -->
+  <!-- <script src="./script.js"></script> -->
+  <script src="./script-part2.js"></script>
+  <script src="./script-part3.js"></script>
+  <script src="./script-part4.js"></script>
+  <script src="./array.js"></script>
+  <script src="./promise.js"></script>
 
   <!-- MODUŁY -->
-  <script type="module" src="./section6/modules.js"></script>
+  <script type="module" src="./modules.js"></script>
   <script type="module">
-    import * as myModule from "./section6/modules.js"
+    import * as myModule from "./modules.js"
     console.log(myModule.testValue)//test
     console.log(myModule.add(33,44))//77
     console.log(myModule.newArr)//77
 
-    import {newArr, add as additional} from './section6/modules.js'
+    import {newArr, add as additional} from './modules.js'
     console.log('newArr', newArr)
     console.log(additional(3,22))//25
 
-    import myDefault from './section6/modules.js'
+    import myDefault from './modules.js'
     console.log(myDefault)//{value: 'Hello world', getData: ƒ}
 
-    import defaultExport, {multiply, testValue as testData} from './section6/modules.js'
+    import defaultExport, {multiply, testValue as testData} from './modules.js'
     console.log(defaultExport)//{value: 'Hello world', getData: ƒ}
     console.log(multiply(3,4), testData)//12 'test'
     // testValues = "test change" // Uncaught ReferenceError: testValues is not defined

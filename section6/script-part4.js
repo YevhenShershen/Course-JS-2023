@@ -4,7 +4,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 
 143. ES6 Math - nowe metody
 */
-
+console.log("=======================SCRIPT-PART4.JS===========================")
 //143. ES6 Math - nowe metody
 console.log('143. ES6 Math - nowe metody')
 

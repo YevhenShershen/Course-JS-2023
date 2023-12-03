@@ -1,3 +1,4 @@
+console.log("=======================EVENT-LOOP.JS===========================")
 //126. Event loop - pętla zdarzeń w JavaScript
 console.log('126. Event loop - pętla zdarzeń w JavaScript')
 

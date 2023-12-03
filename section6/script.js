@@ -11,7 +11,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 133. ES6 Pętla for of kontra for in
 */
 
-
+console.log("=======================SCRIPT.JS===========================")
 //127. ES6 deklaracja zmiennych z let oraz stałych z const
 console.log('127. ES6 deklaracja zmiennych z let oraz stałych z const')
 

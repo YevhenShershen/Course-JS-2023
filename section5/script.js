@@ -14,7 +14,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 125. Losowy żart z serwera
 */
 
-
+console.log("=======================SCRIPT.JS===========================")
 //116. Drzewo DOM - document.getElementById
 console.log('116. Drzewo DOM - document.getElementById')
 

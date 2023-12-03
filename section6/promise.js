@@ -5,7 +5,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 138. ES6 Promise
 */
 
-
+console.log("=======================PROMISE.JS===========================")
 
 //138. ES6 Promise
 console.log('138. ES6 Promise')

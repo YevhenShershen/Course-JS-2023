@@ -7,7 +7,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 136. ES6 Klasy wprowadzenie
 137. ES6 Klasy - rozszerzanie klas z extends i super
 */
-
+console.log("=======================SCRIPT-PART2.JS===========================")
 
 //134. ES6 Map - przechowywanie danych jako klucz wartość
 console.log('134. ES6 Map - przechowywanie danych jako klucz wartość')

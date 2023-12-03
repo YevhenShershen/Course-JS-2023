@@ -8,7 +8,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 */
 
 
-
+console.log("=======================SCRIPT-PART3.JS===========================")
 //139. ES6 Symbol - primityw
 console.log('139. ES6 Symbol - primityw')
 

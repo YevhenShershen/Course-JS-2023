@@ -12,7 +12,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 114. Closures - prywatne dane dzięki domknięciom
 115. Closures z zmiennymi var let i const
 */
-
+console.log("=======================SCRIPT-PART2.JS===========================")
 
 
 //107. Object - metoda assign

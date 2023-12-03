@@ -10,7 +10,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 105. Array - tablice - metody i właściwości - część 2
 106. Array - tablice - metody map filter reduce every
 */
-
+console.log("=======================SCRIPT.JS===========================")
 
 //98. hoisting w JavaScript
 console.log('98. hoisting w JavaScript')
