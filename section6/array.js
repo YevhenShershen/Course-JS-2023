@@ -5,6 +5,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 142. ES6 Array - nowe metody
 */
 
+console.log("=======================ARRAY.JS===========================")
 //142. ES6 Array - nowe metody
 console.log('142. ES6 Array - nowe metody')
 
