@@ -5,6 +5,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 146. ES7 EcmaScript 2016 includes i operator potęgowania
 147. ES8 EcmaScript 2017
 148. ES9 EcmaScript 2018
+149. ES6 generatory
 */
 
 console.log("=======================SCRIPT-PART5.JS===========================")
@@ -136,4 +137,52 @@ fetch("https://api.chucknorris.io/jokes/random")
   //wywoła się niezależnie od wyniku
   //resolve, error
   console.log("finally")
+})
+
+
+
+//149. ES6 generatory
+console.log('149. ES6 generatory')
+
+function * foo3(){
+  yield "test 1"
+  yield "test 2"
+  yield "test 3"
+}
+
+const testIter3 = foo3()
+console.log('testIter3', testIter3.next())//testIter3 {value: 'test 1', done: false}
+console.log('testIter3', testIter3.next())//testIter3 {value: 'test 2', done: false}
+console.log('testIter3', testIter3.next())//testIter3 {value: 'test 3', done: false}
+console.log('testIter3', testIter3.next())//testIter3 {value: undefined, done: true}
+
+function *genRandomId(){
+  while(true){
+    let v = Math.trunc(Math.random() * 1000)
+    yield v
+  }
+}
+const randomId = genRandomId()
+console.log("RANDOM_ID",randomId.next())
+console.log("RANDOM_ID",randomId.next())
+console.log("RANDOM_ID",randomId.next())
+console.log("RANDOM_ID",randomId.next())
+
+
+function *genRandomMaxId(){
+  while(true){
+    //pierwsze wywołanie next() zatrzyma nam na yield czyli przed pszypisyłaniem wartości
+    //kolejne wyłowanie next()
+    const maxValue = yield
+    let v = Math.trunc(Math.random() * maxValue)
+    yield v;
+  }
+}
+const arr = Array.from(Array(10).keys())
+console.log(arr)//[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+const randomNumMaxIter = genRandomMaxId();
+arr.forEach(el =>{
+  randomNumMaxIter.next()// zatrzymujemy się przed przepisaniem wartości do maxValue
+  const random = randomNumMaxIter.next(150)
+  console.log("RANDOM",random.value)
 })
