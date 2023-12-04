@@ -4,6 +4,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 
 146. ES7 EcmaScript 2016 includes i operator potęgowania
 147. ES8 EcmaScript 2017
+148. ES9 EcmaScript 2018
 */
 
 console.log("=======================SCRIPT-PART5.JS===========================")
@@ -65,3 +66,74 @@ console.log(str)//00000Hello
 
 str = str.padEnd(20, "!")
 console.log(str)//00000Hello!!!!!!!!!!
+
+
+
+//148. ES9 EcmaScript 2018
+console.log('148. ES9 EcmaScript 2018')
+async function *getData2(){
+yield await Promise.resolve("ok 1")
+yield await Promise.resolve("ok 2")
+yield await Promise.resolve("ok 3")
+yield await Promise.resolve("ok 4")
+}
+let dataIter = getData2()
+dataIter.next().then(el =>console.log(el.value))//ok 1
+dataIter.next().then(el =>console.log(el.value))//ok 2
+dataIter.next().then(el =>console.log(el.value))//ok 3
+dataIter.next().then(el =>console.log(el.value))//ok 4
+
+async function testIter(){
+let dataIter2 = getData2();
+for await (let value of dataIter2){
+  console.log("TestIter",value)
+}
+}
+testIter()
+
+
+//rest - zawsze musi być na końcu, on zbiera reszte naszych danych
+const foo2 ={
+  userName: "Ania",
+  city: "KRK",
+  country: "Poland"
+}
+
+const {userName, ...data} = foo2
+console.log(userName)//Ania
+console.log(data)//{city: 'KRK', country: 'Poland'}
+
+//
+function userData3({userName, country, ...params}){
+  console.log(userName,country)//Ania Poland
+  console.log(params) //{city: 'KRK'}
+}
+userData3(foo2)
+
+
+//sread
+const bar = {
+  nameObj: "test",
+  age:23,
+  a:23,
+  b:99
+}
+const obj2 = {
+  a:1000,
+  ...bar,
+  c:7
+}
+console.log(obj2)//{a: 23, nameObj: 'test', age: 23, b: 99, c: 7} nadpisał 'a' bo ostania wartość wygrywa i nadpisuje
+
+
+//finally in promise
+
+fetch("https://api.chucknorris.io/jokes/random")
+.then(response => response.json())
+.then(data => console.log(data)) //
+.catch(error => console.log(error))
+.finally(()=>{
+  //wywoła się niezależnie od wyniku
+  //resolve, error
+  console.log("finally")
+})
