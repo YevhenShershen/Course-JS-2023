@@ -5,6 +5,7 @@ LISTA INFORMACJI W TYM PLIKU (MOŻNA ODSZUKIWAĆ PO TYCH TREŚCIACH)
 150. ES6 Reflext api
 151. ES6 Proxy api
 153. ES10 EcmaScript 2019
+154. ES11 EcmaScript 2020
 */
 
 console.log("=======================SCRIPT-PART-6.JS===========================")
@@ -126,3 +127,109 @@ asd
 const symbol = Symbol("Symbol info")
 console.log(symbol.toString(symbol))//Symbol(Symbol info)
 console.log(symbol.description)//Symbol info
+
+
+
+//154. ES11 EcmaScript 2020
+console.log('154. ES11 EcmaScript 2020')
+
+let num = Number.MAX_SAFE_INTEGER;
+console.timeLog(num)//Timer '9007199254740991' does not exist
+let newNum = 9007199254740995n; // BigInt
+let newNum2 = 9007199254740999n; // BigInt
+let newNum3 =  newNum + newNum2
+console.log(newNum3)//18014398509481994n
+
+
+//DYNAMICZNY IMPORT
+if(1 === 1){
+  import("./modules.js").then(obj => console.log(obj)
+  ).catch(ERR =>console.log(ERR))
+}
+
+async function loadCode(){
+let { add , multiply} = await import("./modules.js")
+let result = add(2, 19)
+console.log(result)//21
+}
+
+loadCode()
+
+// nullish operator ?? -null i undefined
+
+const x = null || 10; // 10 jako domyślna wartość
+console.log(x);// 10
+
+const str = "" || "text"//pusty string to false
+console.log(str)//text
+
+const y = null ?? 22 //jeśli liwa strona nullish (null czy undefined) //22
+console.log(y)//22
+const txt  = "" ?? "text"
+console.log(txt.length)//0
+
+
+//Optional chaining
+let o = {
+  a:10,
+  obj: {
+    b:23,
+    data:{
+      str:"text 123"
+    }
+  }
+}
+console.log(o?.obj?.data?.str)//text 123
+
+
+const promiseArr =[
+  Promise.resolve(20),
+  Promise.reject(null),
+  Promise.resolve({str: "ok"}),
+  Promise.reject(new Error("Error"))
+]
+
+Promise.allSettled(promiseArr)
+.then(results => {console.log("All promises settled", results)
+  results.forEach(e => console.log(e.status , e.value))
+}
+)//All promises settled (4) [{…}, {…}, {…}, {…}]
+
+/*
+fulfilled 20
+rejected undefined
+fulfilled {str: 'ok'}
+rejected undefined
+*/
+
+
+const str2 = "Hello Anna, Kasia, Ania, Antonia, Ola"
+const regexp = new RegExp('An[a-z]*', "g")
+let match;
+while((match = regexp.exec(str2)) !== null){
+  console.log(match)
+  console.log(`${match[0]} at index: ${match.index}`)
+
+}
+/*
+['Anna', index: 6, input: 'Hello Anna, Kasia, Ania, Antonia, Ola', groups: undefined]
+Anna at index: 6
+['Ania', index: 19, input: 'Hello Anna, Kasia, Ania, Antonia, Ola', groups: undefined]
+Ania at index: 19
+['Antonia', index: 25, input: 'Hello Anna, Kasia, Ania, Antonia, Ola', groups: undefined]
+Antonia at index: 25
+*/
+
+console.log(globalThis === window)//true
+
+
+//module namespace exports
+import * as utils from './modules.js'
+export {utils};
+
+
+//właśnie to jest zapis 'module namespace exports'
+export * as utils from'./modules.js'
+
+
+//for in order według kolejności zdefiniowania kluczy w obiekcie
