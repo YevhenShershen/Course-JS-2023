@@ -58,6 +58,12 @@
 <!-- <script src="./script-part5.js"></script> -->
 <!-- <script src="./script-part6.js"></script> -->
 <script src="./script-part7.js"></script>
+<script type="module">
+  //top level await
+  const response = await fetch('https://api.chucknorris.io/jokes/random')
+  const data = await response.json()
+  console.log(data)
+</script>
 </html>
 <style>
 
