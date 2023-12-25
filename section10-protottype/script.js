@@ -1,4 +1,5 @@
 //163. Prototypy - podstawy
+console.log('163. Prototypy - podstawy')
 
 //trorzymy konstruktor Thing
 function Thing(name){
@@ -51,6 +52,7 @@ telephone2.constructor.prototype.constructor.prototype //łańcuch prototypów
 
 
 //164. Przesłanianie pól prototype
+console.log('164. Przesłanianie pól prototype')
 
 //pszesłonięcie weight z prototypu bezpośrednią
 //właściwością weight w instancji
@@ -75,3 +77,69 @@ smartphone.toString()//toString from instance
 
 let smartphone2 = new Thing2('smartphone2')
 smartphone2.toString()//toString from prototype
+
+
+
+
+//165. __proto__ oraz listowanie właściwości
+console.log('165. __proto__ oraz listowanie właściwości')
+/*
+__proto__ wskazuje na prototyp danego obiektu, jeśli właściwość lub metoda nie jest
+znaleziona w obiekcie to będzie szukana w prototypie po __proto__.
+Uwaga w praktyce __proto__ odnosi się do właściwości [[Prototype]],
+ale ona nie jest dotępna z pozycji języka JavaScript
+
+__proto__ jest nizalecane i nie powinno się go używać, ale nadal istnieje i w
+praktyce oznacza powyższe [[Prototype]]
+*/
+
+
+/*
+Właściwość prototype jest dotępna wyłącznie dla funkcji konstruujących obiekt wraz z new, czyli
+dla konstróktorów. Tak stworzona nowa instrukcja obiektu będzie miała referencję do
+prototypu funkcji konstruującej poprzez __proto__. Dzięki temu dodając metodę czy zmienną
+do prototypu konstruktora to będą widoczne we szystkich instancjach.
+*/
+
+function Motorcycle (name){
+this.name = name
+}
+
+moto = new Motorcycle("Jamaha")
+
+Motorcycle.prototype.price = 1500
+console.log(moto.constructor.prototype.price)//1500
+console.log(moto.__proto__.price)//1500
+console.log(moto.constructor.prototype === moto.__proto__)//true
+
+
+function Car (name){
+  this.name = name
+}
+
+Car.prototype.brand = "ford"
+Car.prototype.showInfo = function(){
+  console.log(this.name, this.brand)
+}
+
+let mustang = new Car("Mustang")
+let f150 = new Car("F150")
+
+//lostowanie właściwości obiektu,
+//włączając z prototypem
+for(prop in mustang){
+  console.log(prop)
+}
+/*
+name
+brand
+showInfo
+*/
+
+// wyświetla właściwości tylko które znajdują się w instancji naszego obiektu
+for (prop in mustang){
+  if(mustang.hasOwnProperty(prop)){
+    console.log(prop)
+  }
+}//name
+
