@@ -141,5 +141,5 @@ for (prop in mustang){
   if(mustang.hasOwnProperty(prop)){
     console.log(prop)
   }
-}//name
+}//name 
 
