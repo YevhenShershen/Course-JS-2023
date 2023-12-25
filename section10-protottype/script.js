@@ -1,6 +1,7 @@
 //163. Prototypy - podstawy
 console.log('163. Prototypy - podstawy')
 
+//automatycznie do konstruktora jest przepisany obiekt który możemy rozszerzać
 //trorzymy konstruktor Thing
 function Thing(name){
   this.name = name
@@ -141,5 +142,5 @@ for (prop in mustang){
   if(mustang.hasOwnProperty(prop)){
     console.log(prop)
   }
-}//name 
+}//name
 
