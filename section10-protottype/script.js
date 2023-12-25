@@ -27,8 +27,8 @@ Co jest  dużą zaletą ponieważ kolejne instancje będą spówdzieliwy te same
 function Thing2 (name){
   this.name = name;
 }
-Thing.prototype.weight = 50
-let telephone2 = new Thing ("prone");
+Thing2.prototype.weight = 50
+let telephone2 = new Thing2 ("prone");
 console.log(telephone2.weight);//50
 /*
 -Interpreter Javascript spotyka odłowanie do słaściwości weight.
@@ -46,3 +46,32 @@ swój prototype. Przeszukany będzie łańcuch prototypów, aż interpreter dotr
 wbudowanego obiektu Object, który jet rodziecem wszystkich obiektów.
 telephone2.constructor.prototype.constructor.prototype //łańcuch prototypów
 */
+
+
+
+
+//164. Przesłanianie pól prototype
+
+//pszesłonięcie weight z prototypu bezpośrednią
+//właściwością weight w instancji
+let smartphone = new Thing2('smartphone')
+smartphone.weight = 10 //pszesłonięcie weight
+console.log(smartphone.weight)//10
+
+delete smartphone.weight; //skasowanie właściwości
+console.log(smartphone.weight); //50 ponownie z prototype
+
+Thing2.prototype.toString = function (){
+  console.log('toString from prototype')
+}//pszesłonięcie toString
+
+smartphone.toString = function (){
+  console.log('toString from instance')
+}
+
+console.log(smartphone)
+Thing2.prototype.toString()//toString from prototype
+smartphone.toString()//toString from instance
+
+let smartphone2 = new Thing2('smartphone2')
+smartphone2.toString()//toString from prototype
