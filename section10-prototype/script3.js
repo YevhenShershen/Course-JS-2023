@@ -58,3 +58,44 @@ console.log(rect instanceof Figure);//true
 console.log(rect instanceof Figure2d);//true
 console.log(rect instanceof Rect); //true
 console.log(Figure2d.prototype.isPrototypeOf(rect));//true
+
+
+
+//168. Dziedziczenie poprzez pożyczanie konstruktora
+console.log('168. Dziedziczenie poprzez pożyczanie konstruktora')
+
+function Machine (name, vendor){
+  this.name = name;
+  this.vendor = vendor;
+  this.printInfo = function (){
+    console.log(this.name, this.vendor)
+  }
+}
+Machine.prototype.getVendor = function(){
+  return this.vendor
+}//dopisujemy nową właściwość do prototypu
+
+function Vehicle(name, vendor, type, numWheels){
+  //Machine.apply(this.[name,vendor])
+  Machine.call(this, name, vendor);
+  this.type = type;
+  this.numWheels = numWheels
+}Vehicle
+Vehicle.prototype = new Machine();//przepisujemy do prototypu Vehicle nowąinstancję z obiektu Machine
+console.log(Vehicle.prototype.constructor); //Machine()...
+Vehicle.prototype.constructor = Vehicle; //ustawiamy konstruktor Vehicle na Vehicle
+
+let car2 = new Vehicle('f150','ford','truck', 4);
+console.log(car2)
+console.log(car2.getVendor())//ford
+car2.printInfo()//f150 ford
+
+function Truck(name, vendor, type, numWheels,cargoType, weight){
+  Vehicle.call(this, name, vendor, type, numWheels)
+  this.cargoType= cargoType;
+  this.weight = weight;
+}
+let truck = new Truck("Fmx","volvo","truck", 6 , "fuel", 10_000)
+truck.printInfo()//Fmx volvo
+console.log(truck)
+console.log(truck.getVendor())//Uncaught TypeError: truck.getVendor is not a function
