@@ -98,4 +98,44 @@ function Truck(name, vendor, type, numWheels,cargoType, weight){
 let truck = new Truck("Fmx","volvo","truck", 6 , "fuel", 10_000)
 truck.printInfo()//Fmx volvo
 console.log(truck)
-console.log(truck.getVendor())//Uncaught TypeError: truck.getVendor is not a function
+// console.log(truck.getVendor())//Uncaught TypeError: truck.getVendor is not a function
+
+
+
+//169. Prototyp z Object.create()
+console.log('169. Prototyp z Object.create()')
+//Object.create(proto, properties) tworzy nowy obiekt wraz z prototypem
+
+const player ={
+  name: "unknown",
+  login: function() {console.log(this.name + " zalogowany")},
+  logout: function(){console.log(this.name)},
+  printInfo: function (){console.log(this.name, this.country, this.points)}
+}
+
+//bot ma prototyp z obiektem player oraz
+//dodane name i country jako właściwości
+let bot = Object.create(player,{
+  name:{value:"cpu player 1"},
+  country: {value:"n/a"}
+})
+bot.points = 10;
+
+bot.login();//cpu player 1 zalogowany
+bot.printInfo()//cpu player 1 n/a 10
+
+
+//Przykład
+const car = {
+  name:null,
+  setName: function(name){this.name = name},
+  getName: function(){return this.name}
+}
+
+let vehicle = Object.create(car,{
+  brand:{value:"ford"},
+  getBrand:{value:function(){return this.brand}}
+})
+console.log(vehicle)
+console.log(vehicle.setName("Mustang"))
+console.log(vehicle.getName(), vehicle.getBrand())//Mustang ford
