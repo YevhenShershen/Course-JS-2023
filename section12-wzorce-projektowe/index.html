@@ -12,10 +12,18 @@
   <li>script - Wzorce konstrukcyjne (Constructor)</li>
   <li>script1 - Wzorzec prototyp (Prototype)</li>
   <li>script2 - Wzorce konstrukcyjne (Singleton Pattern)</li>
+  <li>script3 - Module pattern - Wzorce konstrukcyjne</li>
 </ul>
   </body>
   <!-- <script src="script.js"></script> -->
-  <script src="script2.js"></script>
+  <script src="script3.js"></script>
+  <script type="module" src="es6-module.js"></script>
+  <script type="module">
+    import * as myModule from './es6-module.js'
+
+    myModule.foo()//foo from module: 99
+
+  </script>
 </html>
 <style>
 textarea {
