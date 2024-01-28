@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+  </head>
+  <body>
+<h1>Abstract factory</h1>
+
+  </body>
+  <!-- <script src="script.js"></script> -->
+  <script >
+    /*
+Abstract factory ma na celu zgrupowanie wielu fabryk w celu osiągnięcia jednego celu np tworzenia
+obiektów o podobnych charakterystykach jak konkretne metody itd. Abstrakcyjna fabryka np wegikułów
+mogłaby zwracać motocykle, samochody lub ciężarówki z trzech różnych fabryk, a każda taka maszyna
+umożliwiałaby poruszanie się właścicielowi.
+*/
+    function Vehicle(name,numWheels){
+      this.name = name;
+      this.numWheels = numWheels;
+    }
+
+    //trowrzymy pototyp do Vehicle
+    Vehicle.prototype.toString = function (){
+      console.log(this.name, "numWheels: " + this.numWheels)
+    }
+
+    Vehicle.prototype.move = function(){
+      console.log(this.name + " moving")
+    }
+
+
+
+    //tworzymy konstruktor Bike
+    function Bike(name){
+      Vehicle.call(this,name,2);
+      this.electricFlag =false;
+      this.isElectric = ()=> this.electricFlag;
+    }
+    //przepisujemy prototype
+    // Bike.prototype = new Vehicle();
+    Bike.prototype = Object.create(Vehicle.prototype);
+
+    //przepisujemy konstruktor
+    Bike.prototype.constructor = Bike;
+//tworzymy funkcje która zwróci nam nową instancje obiektów na bazie kostruktora Bike
+function BikeFactory(){
+  return new Bike("rower")
+}
+//tworzymy fabryke samochodów
+    function Car(name){
+      Vehicle.call(this,name,4);
+      this.carType = "sedan"
+      this.setCarType = (type)=> this.carType = type
+      this.electricFlag =false;
+      this.isElectric = ()=> this.electricFlag;
+    }
+    Car.prototype = Object.create(Vehicle.prototype);
+    Car.prototype.constructor = Car;
+
+function CarFactory(){return new Car('auto')}
+
+// console.log(CarFactory())
+
+
+//tworzymy abstrakcyjną fabrykę (funkcja natychmiastowa która się wyłowuje odrazu sama siebie)
+const AbstractVehicleFactory =(function(){
+let types = [];
+return {
+  registerType: function(type, factory){//rejestracja prawidłowej fabryki
+    let v = factory();
+    if(v.numWheels && v.name)
+    types[type] = factory //przepisujemy ciało funkcji
+  },
+
+  getVehicle: function(type){
+    let vehicleType = types[type];
+    if(vehicleType)
+    return vehicleType()
+    else return null
+  }
+}
+})()
+
+//rejestrujemy nasze fabryki
+AbstractVehicleFactory.registerType('bike', BikeFactory)
+AbstractVehicleFactory.registerType('car',CarFactory)
+
+console.log(AbstractVehicleFactory.getVehicle("bike"))
+console.log(AbstractVehicleFactory.getVehicle("car"))
+
+   //let bike = new Bike('rower')
+   // let car = new Car('car')
+   // console.log(car.isElectric())
+    //console.log(bike)
+  </script>
+</html>
+<style>
+</style>
