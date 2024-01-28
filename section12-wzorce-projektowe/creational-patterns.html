@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+  </head>
+  <body>
+<h1>Build patterns</h1>
+<ul>
+
+</ul>
+  </body>
+  <script>
+
+    //177. Wzorzec Builder
+
+    /*
+    Builder - Wzorce konstrukcyjne - Creational Patterns
+
+    Builder jest to elastyczny wzorzec mający na celu budowanie skomplikowanych obiektów, krok po
+    kroku co uprzszcza cały proces. Wszelkie detale tworzenia obiektu są ukryte przed klientem.
+    */
+
+
+    /*
+    Do budowy zadania wykorzystamy TaskBuilder, który pozwoli na tworzenie obiektu w etapach,
+    Każda funckja dodająca właściwość będzie zwracała this, dzięki czemu powstanie łańcuch
+    wywołań funkcji tzw. fluent API.
+    */
+
+    function Task( name, description, isDone){
+    this.name = name;
+    this.description = description;
+    this.isDone = isDone
+   }
+
+   function TaskBuilder(){
+    let name, description, isDone;
+
+    return{
+      setName: function(newName){
+        name = newName;
+        console.log('this',this)
+        return this
+      },
+      setDescription: function( newDescription){
+        description = newDescription;
+        return this
+      },
+      isDone: function(doneFlag){
+        isDone = doneFlag;
+        return this
+      },
+      build: function(){
+        return new Task(name, description, isDone)
+      }
+    }
+   }
+
+   const tb = TaskBuilder();
+   let builder = tb.setName("zadanie 1");
+   tb.setDescription("opis")
+   tb.isDone(true)
+   let task = tb.build()
+   console.log(task);
+
+  </script>
+</html>
