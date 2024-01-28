@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+  </head>
+  <body>
+<h1>Factory with Composition</h1>
+<ul>
+
+</ul>
+  </body>
+  <script>
+    let speaker = function (state){
+
+      let words = state.words || "Witam"
+      function sing(){
+        console.log(state.name + " spiewa.")
+      }
+      return {
+        sing: sing,
+        speak:()=> console.log(state.name + " mówi " + words)
+      }
+    }
+
+    let person = function (name, age, city){
+      let state = {
+        name: name,
+        age: age,
+        city: city,
+       // words: "Cześć!"
+      }
+
+      return Object.assign(
+        state,
+        speaker(state),
+        walker(state),
+        eater(state)
+        );
+    }
+    let walker = function(state){
+      return {
+      walk: ()=> console.log(state.name + " idzie."),
+      run:(isFast)=>{
+        let txt = (isFast ? " szybko" : " ") + " biegnie";
+        console.log(state.name + txt)
+      }
+      }
+    }
+
+    let eater = function (state){
+      return {
+        eat : function (){
+          console.log(state.name + " spożywa jedzenie.")
+        }
+      }
+    }
+
+    let p = person("Ania", 23, "Gdansk")
+    console.log(p)
+    p.speak()//Ania mówi Cześć!
+    p.sing()//Ania spiewa.
+    p.run(true)//Ania szybko biegnie
+    p.walk()//Ania idzie.
+    p.eat()//Ania spożywa jedzenie.
+  </script>
+</html>
