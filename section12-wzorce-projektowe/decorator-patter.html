@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+  </head>
+  <body>
+<h1>Decorator patterns</h1>
+<ul>
+
+</ul>
+  </body>
+  <script>
+
+    //180. Wzorzec Decorator
+
+    /*
+    Decorator
+    Jest jednym z popukarniejszych wzorców projektowych, pozwala na dynamiczną zmianę
+    zachowania plikacji, rozszerza jej możliwości dekorując obiekty nowymi właściwościami.
+
+    Javascript to dynamiczny język, więc z łatwością możemy rozszerzać właściwości obiketów co
+    czasem jest łatwiesze niż pisanie wielu kostruktorów dla każdego potencjalnego przypadku.
+    */
+
+    //PRZYKŁAD 1
+    function User (name, addr){
+      this.name = name;
+      this.addr = addr
+    }
+
+    let user = new User("Ola", "Kraków");
+
+    function decorateUserToEmployee(user,data){
+      user.company = data.company || "Default Ltd";
+      user.salary = data.salary || 5000;
+      user.tasks = [];
+      user.addTask = function(task){
+        this.tasks.push(task)
+      }
+      user.listTasks = function (){
+        this.tasks.forEach(element => console.log(element.title))
+      }
+      return user
+    }
+
+    let data = {company:"Some Company Ltd"};
+    let employee = decorateUserToEmployee(user, data)
+    console.log(employee)
+
+    employee.addTask({title:"Zadanie 1"})
+    employee.addTask({title:"Zadanie 2"})
+    employee.addTask({title:"Zadanie 3"})
+
+    employee.listTasks()
+
+
+        //PRZYKŁAD 2
+        function LaptopConfig(price, inches){
+          this.cost = function(){
+            return price
+          }
+          this.screenSize = function(){
+            return inches
+          }
+          this.info = ()=>console.log(`laprop kosztuje  ${this.cost()} z rozszerzeniem ${this.screenSize()}px i ubezpieczeniem`)
+        }
+
+        //decorator 1 który odpowiada za zmiane cene przy ilości RAM
+        function increasenRam(comp){
+          let basicCost = comp.cost();
+          comp.cost = function(){
+            return basicCost +500
+          }
+        }
+
+        //decorator 2 odpowiada za zmiane w cene przy dodawaniu ubezpieczenia
+        function addInsurance(comp){
+          let c = comp.cost()
+          comp.cost = function(){
+            return c + (c* 0.1)
+          }
+        }
+function  increaseScreenSize(comp){
+  let basicScreenSize = comp.screenSize()
+  let basicCost = comp.cost()
+  if(basicScreenSize < 24){
+    comp.screenSize = ()=> basicScreenSize +1
+    comp.cost = ()=> basicCost + 300
+  }
+}
+        let laptop = new LaptopConfig(2000,20)
+        increasenRam(laptop);
+        console.log(laptop.cost())
+        addInsurance(laptop)
+        console.log(laptop.cost())
+        increaseScreenSize(laptop)
+        laptop.info()
+        increaseScreenSize(laptop)
+        laptop.info()
+        increaseScreenSize(laptop)
+        laptop.info()
+        increaseScreenSize(laptop)
+        laptop.info()
+        increaseScreenSize(laptop)
+        laptop.info()
+        increaseScreenSize(laptop)
+        laptop.info()
+  </script>
+</html>
