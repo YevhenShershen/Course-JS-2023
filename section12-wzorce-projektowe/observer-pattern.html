@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pattern</title>
+  </head>
+  <body>
+<h1>Observer pattern</h1>
+<ul>
+
+</ul>
+  </body>
+  <script>
+   //183. Wzorzec Observer
+   /*
+    Observer - Wzorzec opisuje obiekt(nazywany Subject lub Observable), który informuje inne obiekty
+    zmianie swojego stanu, dzięki czemu subskrybenci mogą zareagować na wszelkie zmiany.
+   */
+
+    function JobPortal(){
+      this.observers = [];
+      this.subscribe = function(observer){
+        this.observers.push(observer)
+      }
+      this.unsubscribe = function(observer){
+        let index = this.observers.findIndex(
+          el => el === observer
+        )
+        this.observers.splice(index, 1)
+      }
+      this.addNewOffer = function(offer){
+        this.observers.forEach(
+          el => el.notify(offer)
+        )
+      }
+    }
+
+    function Candidate(name){
+      this.name = name;
+      this.notify = function (offer){
+        console.log( this.name + " ma ofertę: "+ offer)
+      }
+    }
+
+    let jobPortal = new JobPortal();
+    jobPortal.subscribe(new Candidate("Ola"))
+    jobPortal.subscribe(new Candidate("Bartek"))
+    let user3 = new Candidate("Ania")
+    jobPortal.subscribe(user3)
+    jobPortal.unsubscribe(user3)
+    jobPortal.addNewOffer("Frontend dev oferta")
+    //Ola ma ofertę: Frontend dev oferta
+    //Bartek ma ofertę: Frontend dev oferta
+  </script>
+</html>
