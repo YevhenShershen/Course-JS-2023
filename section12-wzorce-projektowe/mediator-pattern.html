@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pattern</title>
+  </head>
+  <body>
+<h1>Behavioral pattern</h1>
+<ul>
+
+</ul>
+  </body>
+  <script>
+   //182. Wzorce behawioralne, mediator
+   /*
+   Wzorce behawioralne
+   opisują metody komunikacji między obiektami oraz ich wzajemny podział obowiązków.
+   Dodatkowo pomagają w synchronizacji informacji pomiędzy komponentami naszego systemu.
+
+   Mediator  to centralny węzel komunikacyjny w programie zarządzający przesyłaniem wiadomości w rozproszonym systemie.
+   Zainteresowane obiekty wiedzą o mediatorze, ale o sobie nawzajem już nie.
+   Mediator zdejmuje odpowiedzialność za komunikację między obiektami dostarczając interfejs
+   do wysyłki oraz odbioru wiadomości.
+
+   Kod staje się dzięki mediatorowi czetelnejszy, ale jeśli zawiedzie przestaną działać elementy
+   aplikacji, które z niego korzystają.
+   */
+
+   function User(name){
+    this.name = name;
+    this.chatroom = null
+   }
+
+   User.prototype.send = function(msg, to){
+   if(this.chatroom) this.chatroom.send(msg,this,to)
+   }
+
+   User.prototype.receive = function(msg,from){
+    console.log("from: " + from.name, " to user: " + this.name, ": " + msg)
+   }
+
+   let chatRoom = function(){
+    let users = {};
+    return{
+      register:function(user){
+        if(!users[user.name]){
+          users[user.name] = user;
+          user.chatroom = this
+        }
+      },
+      send: function(msg, from, to){
+        if(to){
+          to.receive(msg, from)
+        }else{
+          for(key in users)
+          {
+            if(users[key] !== from)
+            users[key].receive(msg, from)
+          }
+        }
+      }
+    }
+   }
+
+   const chat = chatRoom()
+   let user1 = new User("Ania"); chat.register(user1)
+   let user2 = new User("Basia"); chat.register(user2)
+   let user3 = new User("Kasia"); chat.register(user3)
+   user1.send("Czesc wszystkim!")
+
+   user2.send("Witaj Ania", user1)
+  </script>
+</html>
