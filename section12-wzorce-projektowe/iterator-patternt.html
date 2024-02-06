@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pattern</title>
+  </head>
+  <body>
+<h1>Iterator pattern</h1>
+<ul>
+
+</ul>
+  </body>
+  <script>
+   //184. Wzorzec Iterator
+
+   //PRZYKŁAD 1
+    const arr = ["one", "two", "three", "four", "five", "six"]
+
+    function iterate(arr, callback, scope){
+      scope = scope || arr;
+      for(let i = 0; i < arr.length; i++){
+        callback.call(scope, i, arr[i])
+      }
+    }
+
+    iterate(arr, function(index, element){
+      console.log('index ' + index, element)
+    })
+      /*
+    index 0 one
+    index 2 three
+    index 3 four
+    index 4 five
+    index 1 two
+    index 5 six
+      */
+
+   //PRZYKŁAD 2
+
+   let Iterator = function (items){
+    this.index= 0;
+    this.items = items
+   }
+
+   Iterator.prototype = {
+    first: function (){
+      this.reset;
+      return this.next()
+    },
+
+    hasNext: function(){
+      return this.index <= this.items.length
+    },
+    next: function(){
+      return this.items[this.index++]
+    },
+    reset: function(){
+      this.index = 0
+    },
+    each: function(callback){
+      for(let item = this.first(); this.hasNext(); item = this.next()){
+        callback(item)
+      }
+    }
+   }
+
+   let arr2 = ['mgmc', 'sdasd', 'sss']
+   let iterator = new Iterator(arr2)
+   iterator.each(function(item){
+    console.log(item)
+   })
+   /*
+      mgmc
+      sdasd
+      sss
+    */
+  </script>
+</html>
