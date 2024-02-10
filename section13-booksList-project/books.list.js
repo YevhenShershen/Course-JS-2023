@@ -60,6 +60,42 @@ class BooksList {
     })
   this.saveData()
   }
+
+  moveBookDown(bookId){
+    let arr = this.books;
+    for(let  a = 0; a < arr.length; a++){
+      let el = arr[a]
+      if(el.id == bookId){
+        if(a <= arr.length - 2){
+          let temp = arr[a+1];
+          arr[a+1] = arr[a]
+          arr[a] = temp
+          break
+        }
+      }
+  }
+  this.saveData();
+  ui.deleteAllBookRows();
+  this.loadDataFromStorage()
+  }
+
+  moveBookUp(bookId){
+    let arr = this.books;
+    for(let  a = 0; a < arr.length; a++){
+      let el = arr[a]
+      if(el.id == bookId){
+        if(a >= 1){
+          let temp = arr[a-1];
+          arr[a-1] = arr[a]
+          arr[a] = temp
+          break
+        }
+      }
+  }
+  this.saveData();
+  ui.deleteAllBookRows();
+  this.loadDataFromStorage()
+  }
 }
 
 const booksList = new BooksList();
@@ -72,6 +108,15 @@ class Ui{
     e.target.parentElement.parentElement.remove()
     booksList.removeBookById(bookId)
   }
+
+  deleteAllBookRows(){
+    const tbodyRows = document.querySelectorAll("#booksTable tbody tr")
+
+    tbodyRows.forEach(function(el){
+      el.remove()
+    })
+  }
+
   addBookToTable(book){
     const tbody = document.querySelector("#booksTable tbody")
     const tr = document.createElement("tr")
@@ -83,6 +128,12 @@ class Ui{
     <button type="button" data-book-id="${book.id}" class="btn btn-danger btn-sm delete">
     Skasuj
     </button>
+    <button type="button" data-book-id="${book.id}" class="btn btn-secondary btn-sm up-arrow">
+    ▲
+    </button>
+    <button type="button" data-book-id="${book.id}" class="btn btn-secondary btn-sm down-arrow">
+    ▼
+    </button>
     </td>
     `;
 
@@ -91,9 +142,25 @@ class Ui{
     let deleteButton = document.querySelector(`button.delete[data-book-id='${book.id}']`)
     deleteButton.addEventListener("click", (e)=>this.deleteBook(e))
 
+    let upButton = document.querySelector(`button.up-arrow[data-book-id='${book.id}']`)
+    upButton.addEventListener("click", (e)=>this.upArrow(e))
+
+    let downButton = document.querySelector(`button.down-arrow[data-book-id='${book.id}']`)
+    downButton.addEventListener("click", (e)=>this.downArrow(e))
+
     this.clearForm()
   }
 
+    upArrow (e){
+      let bookId = e.target.getAttribute("data-book-id")
+      console.log('Up', bookId)
+      booksList.moveBookUp(bookId)
+    }
+    downArrow(e){
+      let bookId = e.target.getAttribute("data-book-id")
+      console.log('Up', bookId)
+      booksList.moveBookDown(bookId)
+    }
   clearForm(){
     document.getElementById("bookTitle").value = ""
     document.getElementById("bookAuthor").value = ""
