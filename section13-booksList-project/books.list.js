@@ -36,11 +36,11 @@ class BooksList {
     const author = document.getElementById("bookAuthor").value;
     const title = document.getElementById("bookTitle").value;
 
-    e.preventDefault()
     if(author === "" || title === ""){
       console.log("blank data")
       return
     }
+    e.preventDefault()
     const book = new Book(title, author)
     this.addBook(book)
   }
@@ -97,6 +97,8 @@ class Ui{
   clearForm(){
     document.getElementById("bookTitle").value = ""
     document.getElementById("bookAuthor").value = ""
+
+    document.getElementById("bookForm").classList.remove("was-validated")
   }
 }
 const ui = new Ui()
@@ -117,4 +119,26 @@ class Storage{
   }
 }
 
-const storage = new Storage()
+const storage = new Storage();
+
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
