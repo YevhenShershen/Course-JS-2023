@@ -39,7 +39,30 @@ this.nextQuestionButton.addEventListener('click', this.setNextQuestionData);
 }
 
 checkAnswer =()=>{
+  this.userSelectedInput = document.querySelector("input[type='radio']:checked");
+  if(!this.userSelectedInput) return
 
+  const selectedIndex = this.userSelectedInput.getAttribute("data-index")
+
+  if(selectedIndex == this.correctAnswerNum){
+    //prawidłowa odpowiedż
+    this.userCorrectAnswerNum++;
+    this.userSelectedInput.classList.add("is-valid")
+
+  }else{
+    //odpowiedżnie prawidłowa
+    this.userBadAnswersNum++;
+    this.userSelectedInput.classList.add("is-invalid")
+  }
+  this.setUserStats()
+
+  this.saveAnswerButton.classList.add('disabled')
+  this.nextQuestionButton.classList.remove("disabled")
+}
+
+setUserStats =()=>{
+  document.getElementById("correctAnswers").innerHTML =this.userCorrectAnswerNum;
+  document.getElementById("badAnswers").innerHTML =this.userBadAnswersNum;
 }
 
 setNextQuestionData =()=>{
@@ -56,6 +79,14 @@ setNextQuestionData =()=>{
     this['answer'+ i].innerHTML = question.answers[i]
   }
   this.correctAnswerNum = question.correctAnswerNum;
+
+  document.querySelectorAll("input[type='radio']").forEach((el)=>{
+    el.classList.remove("is-valid");
+    el.classList.remove("is-invalid");
+    el.checked = false
+  });
+  this.saveAnswerButton.classList.remove("disabled")
+  this.nextQuestionButton.classList.add("disabled")
 }
 }
 
