@@ -30,7 +30,10 @@ req.on("end",function(){
   let parsed = parse(data)
   console.log("data: " + data)
   console.log("parsed: " + JSON.stringify(parsed))
-
+/*
+data: name=asd&email=shershen.yevhen%40gmail.com
+parsed: {"name":"asd","email":"shasdl@gmail.com"}
+*/
   res.writeHead(200, {"Content-type": "text/html"})
   res.end(htmlForm)
 });
