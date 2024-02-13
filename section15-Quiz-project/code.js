@@ -21,6 +21,7 @@ class Quiz {
   userBadAnswersNum = 0;
   saveAnswerButton = null;
   nextQuestionButton = null;
+  modalWindow = null
 
 init(){
 this.heading = document.querySelector(".alert-heading");
@@ -36,6 +37,14 @@ this.setNextQuestionData()
 
 this.saveAnswerButton.addEventListener("click", this.checkAnswer);
 this.nextQuestionButton.addEventListener('click', this.setNextQuestionData);
+
+this.initModal()
+}
+
+initModal=()=>{
+  this.modalWindow = new bootstrap.Modal(document.getElementById('modal-window'))
+
+  document.getElementById('closeModal').addEventListener("click",this.restartQuiz);
 }
 
 checkAnswer =()=>{
@@ -69,6 +78,7 @@ setNextQuestionData =()=>{
   this.currentQuestionIndex++;
   if(this.currentQuestionIndex >= this.questions.length){
     console.log("Koniec quizu")
+    this.showModalResults()
     return
   }
 
@@ -87,6 +97,27 @@ setNextQuestionData =()=>{
   });
   this.saveAnswerButton.classList.remove("disabled")
   this.nextQuestionButton.classList.add("disabled")
+}
+
+showModalResults =()=>{
+  const modalParagraph = document.getElementById("modalResults")
+  let information;
+  if(this.userCorrectAnswerNum >= this.userBadAnswersNum) {
+    information = "Brawo! Przynajniej połowa z odpowiedzi jest prawidłowa."
+  }else{
+    information = "Niestety, mniej niż połowa odpowiedzi jest prawidłowa."
+  }
+  modalParagraph.innerHTML = information;
+  this.modalWindow.toggle()
+}
+
+restartQuiz = ()=>{
+  this.currentQuestionIndex = -1;
+  this.userCorrectAnswerNum = 0;
+  this.userBadAnswersNum = 0;
+
+  this.setUserStats();
+  this.setNextQuestionData();
 }
 }
 
