@@ -1,8 +1,8 @@
 window.onload = function (){
   ui.init()
-  ui.salaryChange()
+  //ui.salaryChange()
 }
-//składki z pensji pracownika
+//składki z pensji pracownika //do testów
 class MonthlyEmployeeIncome {
   monthNum;//aktualny miesiąc
   grossAmount; //kwota brutto
@@ -133,6 +133,13 @@ const monthlyEmployerCost = new MonthlyEmployerCost();
 class Ui{
     salaryInput;
     salaryGross; //kwota brutto
+    tableMonthlyEmployeeIncomeFields = [
+      'retirementContribution','pensionContribution','sicknessContribution','workerSocialContributionSum',
+      'baseFroHealthContribution', 'healthContribution', 'advanceTax', 'healthAmountToExclude', 'finalWorkerNetMoney'
+    ];
+    tableMonthlyEmployerCostFields = ['employerRetirementContribution','employerPensionContribution','employerAccidentInsurance',
+    'employerWorkFundContribution', 'employerGuaranteedWorkFundContribution','employerContributionSum'
+   ];
   init(){
     this.salaryInput = document.getElementById("salary");
     this.salaryInput = addEventListener('input', this.salaryChange);
@@ -141,23 +148,19 @@ class Ui{
   salaryChange =(e)=>{
   if(e) this.salaryGross =  e.target.value;
 
-  this.salaryGross = 2600
+  //this.salaryGross = 2600
 
   if(!this.salaryGross || isNaN(this.salaryGross)) this.salaryGross = 0;
   console.log(this.salaryGross);
 
   monthlyIncome.calculate(this.salaryGross, 1, 0 )
   monthlyEmployerCost.calculate(this.salaryGross, 1, 0)
-  this.updateDom()
+  this.updateDom(this.tableMonthlyEmployeeIncomeFields, monthlyIncome)
+  this.updateDom(this.tableMonthlyEmployerCostFields, monthlyEmployerCost)
   }
-  tableFields = [
-    'retirementContribution','pensionContribution','sicknessContribution','workerSocialContributionSum',
-    'baseFroHealthContribution', 'healthContribution', 'advanceTax', 'healthAmountToExclude', 'finalWorkerNetMoney'
-]
-
-  updateDom = () =>{
-    this.tableFields.forEach(el=>{
-      this.setValueById(el, monthlyIncome[el].toFixed(2));
+  updateDom = (arr, obj) =>{
+    arr.forEach(property=>{
+      this.setValueById(property, obj[property].toFixed(2));
     })
 
   }
