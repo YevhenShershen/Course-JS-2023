@@ -2,7 +2,6 @@ window.onload = function (){
   ui.init()
   ui.salaryChange()
 }
-
 //składki z pensji pracownika
 class MonthlyEmployeeIncome {
 
@@ -119,9 +118,19 @@ class Ui{
   monthlyEmployerCost.calculate(this.salaryGross, 1, 0)
   this.updateDom()
   }
+  tableFields = [
+    'retirementContribution','pensionContribution','sicknessContribution','workerSocialContributionSum',
+    'baseFroHealthContribution', 'healthContribution', 'advanceTax', 'healthAmountToExclude', 'finalWorkerNetMoney'
+]
 
   updateDom = () =>{
+    this.tableFields.forEach(el=>{
+      this.setValueById(el, monthlyIncome[el].toFixed(2));
+    })
 
+  }
+  setValueById(id, value){
+    document.getElementById(id).innerHTML = value ;
   }
 }
 const ui = new Ui();
