@@ -1,0 +1,1 @@
+const url = 'https://api.nbp.pl/api/exchangerates/tables/a/last'
