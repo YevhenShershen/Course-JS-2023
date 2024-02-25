@@ -4,7 +4,7 @@ window.onload = function (){
 }
 //składki z pensji pracownika
 class MonthlyEmployeeIncome {
-
+  monthNum;//aktualny miesiąc
   grossAmount; //kwota brutto
   accumulatedYearlyIncomeSum;//zakumolowany dochód od początku roku
 //Składka emerytalna - 9.67%
@@ -30,6 +30,7 @@ income;
   calculate(grossAmount, monthNum, accumulatedYearlyIncomeSum){
     if(!accumulatedYearlyIncomeSum) accumulatedYearlyIncomeSum = 0
 
+    this.monthNum = monthNum;
     this.grossAmount = grossAmount;
     this.accumulatedYearlyIncomeSum = accumulatedYearlyIncomeSum;
 
@@ -87,12 +88,43 @@ income;
 const monthlyIncome = new MonthlyEmployeeIncome();
 
 class MonthlyEmployerCost{
-
-
-
+  grossAmount;
+  monthNum;
+  accumulatedYearlyIncomeSum;
+//Składka na ubezpieczenie emerytalne 9.76%:
+employerRetirementContribution;
+//Składka na ubezpieczenie rentowe 6.5%:
+employerPensionContribution;
+//Składka na ubezpieczenie wypadkowe 1.67%:
+employerAccidentInsurance;
+//Składka na fundush pracy 2.45%:
+employerWorkFundContribution;
+//Składka na Fundusz Gwarnatowanych Świadczeń Pracowniczych 0.1%
+employerGuaranteedWorkFundContribution;
+//Suma składek pracodawcy:
+employerContributionSum
 
   calculate(grossAmount, monthNum, accumulatedYearlyIncomeSum){
+    this.grossAmount = grossAmount;
+    this.monthNum = monthNum;
+    this.accumulatedYearlyIncomeSum = accumulatedYearlyIncomeSum;
 
+    //Składka na ubezpieczenie emerytalne 9.76%:
+    this.employerRetirementContribution = grossAmount * 0.0976;
+    //Składka na ubezpieczenie rentowe 6.5%:
+    this.employerPensionContribution = grossAmount * 0.065;
+    //Składka na ubezpieczenie wypadkowe 1.67%:
+    this.employerAccidentInsurance = grossAmount * 0.0167;
+    //Składka na fundush pracy 2.45%:
+    this.employerWorkFundContribution = grossAmount * 0.0245;
+    //Składka na Fundusz Gwarnatowanych Świadczeń Pracowniczych 0.1%
+    this.employerGuaranteedWorkFundContribution = grossAmount * 0.001;
+    //Suma składek pracodawcy:
+    this.employerContributionSum = this.employerRetirementContribution
+    + this.employerPensionContribution
+    + this.employerAccidentInsurance
+    + this.employerWorkFundContribution
+    + this.employerGuaranteedWorkFundContribution
   }
 }
 //składki na pracownika ołacone przez pracodawca
