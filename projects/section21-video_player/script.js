@@ -43,6 +43,25 @@
     videoProgress.innerHTML = `${minutes} : ${seconds}`
   }
 
+  function seekVideo(){
+    let seekToTime = (progressInput.value * video.duration) / 100
+    console.log("seekVideo" + seekToTime)
+
+    if(seekToTime < 0 || seekToTime > videoProgress.duration) return;
+
+    video.pause();
+    video.currentTime = seekToTime;
+
+    var timer = setInterval(() => {
+      if(videoProgress.paused && video.readyState == 4){
+        video.play();
+        clearInterval(timer);
+      }
+    }, 100);
+  }
+
+
+
   function init(){
     console.log("start")
     playPauseButton.addEventListener("click", playPauseClicked)
@@ -51,6 +70,7 @@
     video.addEventListener("pause", updatePlayPauseIcon)
     muteButton.addEventListener("click", muteButtonClicked)
     video.addEventListener("timeupdate", updateVideoProgress)
+    progressInput.addEventListener("change", seekVideo)
 
   }
 
