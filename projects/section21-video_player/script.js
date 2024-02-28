@@ -34,6 +34,15 @@
     }
   }
 
+  function updateVideoProgress(){
+    progressInput.value = (video.currentTime / video.duration) * 100;
+    let minutes = Math.floor(video.currentTime / 60)
+    if(minutes < 10) minutes = "0" + minutes
+    let seconds = Math.floor(video.currentTime % 60)
+    if(seconds < 10) seconds = "0" + seconds
+    videoProgress.innerHTML = `${minutes} : ${seconds}`
+  }
+
   function init(){
     console.log("start")
     playPauseButton.addEventListener("click", playPauseClicked)
@@ -41,6 +50,8 @@
     video.addEventListener("pause", updatePlayPauseIcon)
     video.addEventListener("pause", updatePlayPauseIcon)
     muteButton.addEventListener("click", muteButtonClicked)
+    video.addEventListener("timeupdate", updateVideoProgress)
+
   }
 
 
