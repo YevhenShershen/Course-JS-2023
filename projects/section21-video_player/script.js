@@ -9,6 +9,8 @@
   const videoContainer = document.getElementById("video-container");
   const fullscreenButton = document.getElementById("fullscreen");
 
+  const fullScreenSupported = !!document.fullscreenEnabled;
+
   function playPauseClicked(){
     if(video.paused){
       video.play()
@@ -60,10 +62,21 @@
     }, 100);
   }
 
+  function handleFullScreen(){
+    if(!fullScreenSupported) return;
 
+    if(!document.fullscreenElement){
+      document.documentElement.requestFullscreen()
+      fullscreenButton.innerHTML = '<i class="fa fa-compress"></i>'
+    }else{
+      document.exitFullscreen();
+      fullscreenButton.innerHTML = '<i class="fa fa-expand"></i>'
+    }
+  }
 
   function init(){
     console.log("start")
+    video.controls = false; //wyłączamy wszystkie kontrolki na playerze
     playPauseButton.addEventListener("click", playPauseClicked)
     video.addEventListener("play", updatePlayPauseIcon)
     video.addEventListener("pause", updatePlayPauseIcon)
@@ -71,6 +84,11 @@
     muteButton.addEventListener("click", muteButtonClicked)
     video.addEventListener("timeupdate", updateVideoProgress)
     progressInput.addEventListener("change", seekVideo)
+    if(fullScreenSupported){
+    fullscreenButton.addEventListener("click", handleFullScreen)
+    }else{
+      fullscreenButton.style.display = "none"
+    }
 
   }
 
