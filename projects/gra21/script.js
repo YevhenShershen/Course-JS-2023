@@ -5,8 +5,8 @@ window.onload = function (){
 //buttons
 const playWithComputer = document.getElementById('playWithComputer')
 const restartGame = document.getElementById('restartGame')
-const hitButton = document.getElementById('hitButton')
-const stopButton = document.getElementById('stopButton')
+const hitButtonUser1 = document.getElementById('hitButtonUser1')
+const stopButtonUser1 = document.getElementById('stopButtonUser1')
 const nextGameButton = document.getElementById('nextGameButton')
 
 
@@ -16,7 +16,7 @@ const rightCardText = document.getElementById('rightCardText')
 const leftCardPoints = document.getElementById('leftCardPoints')
 const rightCardPoints = document.getElementById('rightCardPoints')
 const resultInfo = document.getElementById('resultInfo')
-const randomIds = []
+let randomIds = []
 let randomCards = [];
 let points = 0;
 let userResul = 0;
@@ -26,23 +26,27 @@ class App {
   console.log("START App")
 
   restartGame.addEventListener('click', ()=>{
-    buttonMenu.restartGame()
+    buttonMenu.enebledRestartGame()
   })
 
-  hitButton.addEventListener('click', ()=>{
-    buttonMenu.startGameWithComputer()
+  hitButtonUser1.addEventListener('click', ()=>{
+    buttonMenu.startGameWithComputer(leftCardPoints,leftCardText)
   })
 
-  stopButton.addEventListener('click', ()=>{
+  stopButtonUser1.addEventListener('click', ()=>{
     buttonMenu.stopUserButton()
   })
 
   nextGameButton.addEventListener('click',()=>{
     buttonMenu.resetGame()
+    buttonMenu.startGame(leftCardPoints,leftCardText)
+
+    ui.disabledNextGameButton()
   } )
 
   playWithComputer.addEventListener('click', ()=>{
-    buttonMenu.startGame()
+    buttonMenu.startGame(leftCardPoints,leftCardText)
+    ui.enabledButton()
   })
 
   ui.disabledButton()
@@ -132,13 +136,14 @@ class Store {
 
     resetRandomCards = function (){
       randomCards = []
+      randomIds = []
     }
   }
 
 
 class Ui{
-  showCardDeal = function(){
-    leftCardText.innerHTML = randomCards.map(el => `${el.name}`)
+  showCardDeal = function(textHtmlEl){
+    textHtmlEl.innerHTML = randomCards.map(el => `${el.name}`)
   }
 
   showOverPoints = function(points){
@@ -153,7 +158,7 @@ class Ui{
 
   showPoints = function(elem){
     points = randomCards.map(el =>el.value).reduce((accumulator, currentValue) => accumulator + currentValue)
-    leftCardPoints.innerHTML = `POINTS: ${points}`
+    elem.innerHTML = `POINTS: ${points}`
 
     this.showOverPoints(points)
   }
@@ -163,13 +168,13 @@ class Ui{
   }
 
   disabledButton= function(){
-    hitButton.classList.add('disabled')
-    stopButton.classList.add('disabled')
+    hitButtonUser1.classList.add('disabled')
+    stopButtonUser1.classList.add('disabled')
   }
 
   enabledButton= function(){
-    hitButton.classList.remove('disabled')
-    stopButton.classList.remove('disabled')
+    hitButtonUser1.classList.remove('disabled')
+    stopButtonUser1.classList.remove('disabled')
   }
 
   setCardPointsStyle= function(){
@@ -195,14 +200,14 @@ class Ui{
 
 
 class ButtonMenu {
-  startGameWithComputer = function(){
+  startGameWithComputer = function(htmlEl,text){
       playWithComputer.classList.add('disabled')
       store.giveCard()
-      ui.showCardDeal()
-      ui.showPoints()
+      ui.showCardDeal(text)
+      ui.showPoints(htmlEl)
   }
 
-  restartGame = function(){
+  enebledRestartGame = function(){
     playWithComputer.classList.remove('disabled')
   }
 
@@ -210,6 +215,7 @@ class ButtonMenu {
   stopUserButton = function (){
     ui.disabledButton()
     store.resetRandomCards()
+    this.startGame(rightCardPoints, rightCardText)
   }
 
 
@@ -218,15 +224,13 @@ class ButtonMenu {
     ui.resetCardContent()
     ui.enabledButton()
     ui.setCardPointsStyle()
-    this.startGame()
   }
 
 
-  startGame = function (){
-    buttonMenu.startGameWithComputer()
+  startGame = function (el, text){
+    buttonMenu.startGameWithComputer(el, text)
     setTimeout(()=>{
-      buttonMenu.startGameWithComputer()
-      ui.enabledButton()
+      buttonMenu.startGameWithComputer(el, text)
     },1000)
   }
 }
