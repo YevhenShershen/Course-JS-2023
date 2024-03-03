@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="./style.css">
+  <title>Game 21</title>
+</head>
+<body>
+<header class="row justify-content-md-center">
+  <h3 class="col-md-auto my-5">Game 21</h3>
+</header>
+<main class="main-container">
+  <div class="container d-flex">
+    <div class="left-menu d-flex flex-column">
+      <span class="left-menu__title">MENU</span>
+      <button class="btn btn-primary mb-2">PLAY WITH PLAYER</button>
+      <button class="btn btn-primary mb-2" id="playWithComputer">PLAY WITH COMPUTER</button>
+      <button class="btn btn-primary mb-2" id="restartGame">RESTART GAME</button>
+      <button class="btn btn-primary">RULES</button>
+    </div>
+    <div class=" d-flex justify-content-around w-100">
+      <div class="card-left">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title" id="cardPoits">POINTS:</h5>
+            <div class="card-content">
+            <p class="card-text" id="left-card-text">HERE SHOW WHAT YOU HAVE THE CARDS</p>
+          </div>
+            <div class="d-flex justify-content-around">
+            <a href="#" class="btn btn-primary card-button">STOP</a>
+            <a href="#" class="btn btn-primary card-button">HIT</a>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div class="rezult">
+        <div  class="text-center">
+          REZULT: 0 | 0
+        </div>
+      </div>
+      <div class="card-right">
+        <div class="card-left">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">POINTS:</h5>
+              <div class="card-content">
+              <p class="card-text">HERE SHOW WHAT YOU HAVE THE CARDS</p>
+            </div>
+              <div class="d-flex justify-content-around">
+                <a href="#" class="btn btn-primary card-button">STOP</a>
+                <a href="#" class="btn btn-primary card-button">HIT</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content"></div>
+  </div>
+</main>
+<footer class="footer text-center">footer</footer>
+</body>
+</html>
+<script src="./script.js"></script>
