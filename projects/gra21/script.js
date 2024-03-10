@@ -6,7 +6,9 @@ window.onload = function (){
 const playWithComputer = document.getElementById('playWithComputer')
 const restartGame = document.getElementById('restartGame')
 const hitButtonUser1 = document.getElementById('hitButtonUser1')
+const hitButtonUser2 = document.getElementById('hitButtonUser2')
 const stopButtonUser1 = document.getElementById('stopButtonUser1')
+const stopButtonUser2 = document.getElementById('stopButtonUser2')
 const nextGameButton = document.getElementById('nextGameButton')
 
 
@@ -19,8 +21,13 @@ const resultInfo = document.getElementById('resultInfo')
 let randomIds = []
 let randomCards = [];
 let points = 0;
+let user1Points = 0;
 let userResul = 0;
 let computerResult = 0;
+
+
+const styleTextSuccess = 'text-success'
+const styleTextDanger = 'text-danger'
 class App {
   init(){
   console.log("START App")
@@ -30,11 +37,15 @@ class App {
   })
 
   hitButtonUser1.addEventListener('click', ()=>{
+      user1Points = points
     buttonMenu.startGameWithComputer(leftCardPoints,leftCardText)
   })
 
   stopButtonUser1.addEventListener('click', ()=>{
-    buttonMenu.stopUserButton()
+    buttonMenu.stopUser1Button()
+  })
+  stopButtonUser2.addEventListener('click', ()=>{
+    buttonMenu.stopUser2Button()
   })
 
   nextGameButton.addEventListener('click',()=>{
@@ -46,10 +57,11 @@ class App {
 
   playWithComputer.addEventListener('click', ()=>{
     buttonMenu.startGame(leftCardPoints,leftCardText)
-    ui.enabledButton()
+    ui.enabledButtonUser1()
   })
 
-  ui.disabledButton()
+  ui.disabledButtonUser1()
+  ui.disabledButtonUser2()
   ui.disabledNextGameButton()
   }
 }
@@ -148,9 +160,9 @@ class Ui{
 
   showOverPoints = function(points){
     if(points > 21){
-      this.disabledButton()
+      this.disabledButtonUser1()
       userResul++
-      this.setCardPointsStyle()
+      this.setCardPointsStyle(leftCardPoints, styleTextDanger)
       this.showResultInfo()
       this.enebledNextGameButton()
     }
@@ -167,19 +179,39 @@ class Ui{
     resultInfo.innerHTML = `RESULT: ${userResul} | ${computerResult}`
   }
 
-  disabledButton= function(){
+  resultWinner = function (){
+    console.log(user1Points, points)
+    if(user1Points <= points && points <= 21){
+      computerResult++
+      this.showResultInfo()
+      this.setCardPointsStyle(leftCardPoints, styleTextDanger)
+      this.setCardPointsStyle(rightCardPoints, styleTextSuccess)
+      return
+    }
+    console.log('resultWinner2')
+    user1Points++
+    this.showResultInfo()
+    this.setCardPointsStyle(leftCardPoints, styleTextSuccess)
+    this.setCardPointsStyle(rightCardPoints, styleTextDanger)
+  }
+
+  disabledButtonUser1= function(){
     hitButtonUser1.classList.add('disabled')
     stopButtonUser1.classList.add('disabled')
   }
+  disabledButtonUser2= function(){
+    hitButtonUser2.classList.add('disabled')
+    stopButtonUser2.classList.add('disabled')
+  }
 
-  enabledButton= function(){
+  enabledButtonUser1= function(){
     hitButtonUser1.classList.remove('disabled')
     stopButtonUser1.classList.remove('disabled')
   }
 
-  setCardPointsStyle= function(){
-    leftCardPoints.classList.add('text-danger')
-    if(!randomCards.length) leftCardPoints.classList.remove('text-danger')
+  setCardPointsStyle= function(el, text){
+    el.classList.add(text)
+    if(!randomCards.length) el.classList.remove(text)
   }
 
   resetCardContent = function (){
@@ -196,6 +228,23 @@ class Ui{
     nextGameButton.classList.remove('disabled')
   }
 }
+class Computer {
+
+  drawingСardsLogic = function(n){
+
+      if(user1Points > points){
+      console.log('INSIDE2')
+      setTimeout(() => {
+        buttonMenu.startGameWithComputer(rightCardPoints, rightCardText);
+        this.drawingСardsLogic(n + 1)
+    }, 1000);
+      }else{
+          ui.resultWinner()
+          ui.enebledNextGameButton()
+      }
+      }
+
+  }
 
 
 
@@ -212,18 +261,25 @@ class ButtonMenu {
   }
 
 
-  stopUserButton = function (){
-    ui.disabledButton()
+  stopUser1Button = async function (){
+    ui.disabledButtonUser1()
     store.resetRandomCards()
-    this.startGame(rightCardPoints, rightCardText)
+   await this.startGame(rightCardPoints, rightCardText)
+   computer.drawingСardsLogic(0)
+  }
+  stopUser2Button = function (){
+    // ui.disabledButtonUser2()
+    // store.resetRandomCards()
+    // this.startGame(rightCardPoints, rightCardText)
   }
 
 
   resetGame = function(){
     store.resetRandomCards()
     ui.resetCardContent()
-    ui.enabledButton()
-    ui.setCardPointsStyle()
+    ui.enabledButtonUser1()
+    ui.setCardPointsStyle(leftCardPoints, styleTextDanger)
+    ui.setCardPointsStyle(rightCardPoints, styleTextSuccess)
   }
 
 
@@ -239,3 +295,4 @@ const buttonMenu = new ButtonMenu()
 const store = new Store()
 const app = new App()
 const ui = new Ui()
+const computer = new Computer()
