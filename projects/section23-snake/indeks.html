@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400"></canvas>
+</body>
+</html>
+<script>
+  (function(){
+    let canvas;
+    let context2d;
+
+    function getRandomInt(max){
+      return Math.floor(Math.random() * max )
+    }
+    function drawRectRandomColor(x, y, width, height){
+      context2d.fillStyle = `rgb(${getRandomInt(255)}, ${getRandomInt(255)}, ${getRandomInt(255)})`
+
+      context2d.fillRect(x, y, width, height);
+    }
+
+    function startApp(){
+      canvas = document.getElementById("canvas");
+      context2d = canvas.getContext("2d");
+
+      drawRectRandomColor(10, 10, 10, 10)
+      setInterval(function(){
+        let x = getRandomInt(400)
+        let y = getRandomInt(400)
+        drawRectRandomColor(x, y, 10, 10)
+      },70)
+    }
+
+    window.onload = startApp
+  })()
+</script>
+<style>
+canvas{
+  border: 3px solid white;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+body{
+  background-color: black;
+}
+</style>
