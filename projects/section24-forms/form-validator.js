@@ -1,6 +1,7 @@
 class FormValidator{
   constructor(){
     this.formFields = [];
+
     this.form = document.getElementById("form");
 
     this.addFormField("#username", {
