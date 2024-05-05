@@ -1,14 +1,17 @@
 class FormField {
   constructor(
     formFieldSelector,
-    {minLength = 3, maxLength = 11,
+    {
+    minlength = 3,
+    maxlength = 11,
     errorMsgSelector,
     matchWithPasswordId
   }){
     this.formField = document.querySelector(formFieldSelector);
     this.type = this.formField.type;
-    this.minLength = minLength;
-    this.maxLength = maxLength;
+    this.minlength = minlength;
+    this.maxlength = maxlength;
+
     if(!errorMsgSelector) errorMsgSelector = `${formFieldSelector} + span`
     this.errorMsgEl = document.querySelector(errorMsgSelector);
     this.matchWithPasswordId = matchWithPasswordId;
@@ -36,12 +39,12 @@ class FormField {
   }
 
   checkTextLength =()=>{
-    if(this.formField.value.length < this.minLength) {
-      this.showError(`Wymagane minimum znaków: ${this.minLength}`);
+    if(this.formField.value.length < this.minlength) {
+      this.showError(`Wymagane minimum znaków: ${this.minlength}`);
       return false;
     }else
-    if(this.formField.value.length > this.maxLength) {
-      this.showError(`Maksymalnie można użyć: ${this.maxLength}`);
+    if(this.formField.value.length > this.maxlength) {
+      this.showError(`Maksymalnie można użyć: ${this.maxlength}`);
       return false;
     }else{
       this.showSuccess()

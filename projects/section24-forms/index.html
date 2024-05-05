@@ -12,7 +12,7 @@
     <h2>Rejestracja</h2>
     <div class="field-control">
       <label for="username">Nazwa użytkownika</label>
-      <input type="text" id="username" placeholder="Wpisz nazwę użytkownika">
+      <input type="text" id="username" placeholder="Wpisz nazwę użytkownika" minlength="4" maxlength="35">
       <span>Błąd</span>
     </div>
     <div class="field-control">
@@ -26,8 +26,8 @@
       <span>Błąd</span>
     </div>
     <div class="field-control">
-      <label for="password2">Hasło ponownie</label>
-      <input type="password" id="password2" placeholder="Wpisz hasło ponownie">
+      <label for="password2" >Hasło ponownie</label>
+      <input type="password" id="password2" data-match-with-password-id="#password" placeholder="Wpisz hasło ponownie">
       <span>Błąd</span>
     </div>
     <button class="register-button" type="submit">Zarejestruj się</button>
