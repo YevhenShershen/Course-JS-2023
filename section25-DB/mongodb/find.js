@@ -6,7 +6,7 @@ async function initDB(){
   let client = null
 
   try{
-    client= await new MongoClient(url);
+    client = await new MongoClient(url);
     return client;
   }catch(err){
     console.log(err)
