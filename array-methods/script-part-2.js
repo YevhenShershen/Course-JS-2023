@@ -36,4 +36,4 @@ console.log(arrFlat.flat(2))//[1, 2, 3, 4, 22, 33, 44, 33, Array(1)]
 
 //Array.prototype.flatMap()
 const arrFlatMap = [1, [[2], 3], [4]];
-console.log(arrFlatMap.flatMap(el => el * 2))//[1, 2, 3, 4
+console.log(arrFlatMap.flatMap(el => el * 2))//[1, 2, 3, 4]

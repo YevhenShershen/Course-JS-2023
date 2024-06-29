@@ -187,7 +187,7 @@ Callback to funckja przekazywana do innej funkcji jako argument, jest wywoływan
 aby zakończyć jakąś akcję np.
 
 Po co wukorzystuje się callbacki?
-JS jest językiem opartym na zdarzeniach np. kliknięcie praz użytkownika wyzwoli event
+JS jest językiem opartym na zdarzeniach np. kliknięcie raz użytkownika wyzwoli event
 click, który może być obłużony przez callback. Dzięki temu nie trzeba w programie czekać aż
 coś się stanie tylko sam engine wyzwoli podaną funkcję, gdy nastąpi zdarzenie.
 */
