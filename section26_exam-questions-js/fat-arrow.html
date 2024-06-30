@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  const basicAdd = (a,b) => a + b
+
+
+ console.log( basicAdd(2,3))//5
+ /*
+ strałkowe funkcji nie posiadają właściwości argiments
+
+ const =argTest = (a,b) => console.log(arguments)
+ argTest(1,2,3,34,5,6)// Wyskoczy błąd
+
+
+ Za pomocą strzłkowych funkcji nie można stworzyć konstruktor
+ let Bar = () =>{}
+ const bar = new Bar()//Też będzie błąd
+ */
+
+
+ /*
+ Wyrażenie "utraciliśmy kontekst instancji obiektu" w JavaScript odnosi się do sytuacji, w której this
+  nie wskazuje na oczekiwany obiekt lub instancję, co często jest wynikiem nieprawidłowego zarządzania
+  kontekstem this wewnątrz funkcji lub metod. W JavaScript this jest zmienną, która wskazuje na obiekt,
+  w kontekście którego jest wywoływana funkcja.
+
+  const obj = {
+    name: 'Example',
+    greet: function() {
+        console.log('Hello, ' + this.name);
+    }
+};
+
+const greet = obj.greet;
+greet(); // 'Hello, undefined' - 'this' w tym kontekście nie odnosi się do 'obj'
+
+*/
+
+window.data = 99
+function ObjOld (){
+  this.data = 5;
+  this.print = function (){
+    var that = this;
+    setTimeout(function(){
+      console.log("old func this", this.data)
+      console.log("old func that", that.data)
+    },100)
+  }
+}
+
+const oldObj = new ObjOld()
+oldObj.print()
+
+
+//w tym wypadku używamy strałkołą funkcję w SetTimeout i mamy dostęp do zmiennej data w funkcji
+function ObjOld2 (){
+  this.data = 22;
+  this.print = function (){
+
+    setTimeout(()=>{
+      console.log("old2 func this", this.data), 200
+    })
+}
+}
+
+const oldObj2 = new ObjOld2()
+oldObj2.print()
+</script>
