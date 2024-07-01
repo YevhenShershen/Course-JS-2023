@@ -1,0 +1,46 @@
+body{
+  margin: 0;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(135deg, #f6d365 0%, #fd744f 100%);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.autocomplete-container{
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.autocomplete-wrapper{
+  position: relative;
+  width: 100%;
+}
+
+.autocomplete-input{
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#suggestions-list{
+  list-style: none;
+  padding-left: 0;
+  margin-top: 5px;
+}
+
+#suggestions-list li{
+  background-color: #fff;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer
+}
+
+#suggestions-list li:hover{
+  background-color:#f0f0f0;
+}
