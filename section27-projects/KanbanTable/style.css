@@ -1,0 +1,77 @@
+body, html {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #eee; 
+}
+
+.task-input {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.task-input input {
+    flex: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.task-input button {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px; 
+    background-color: #4CAF50; 
+    color: white;
+    border: none; 
+}
+
+.kanban-board {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.kanban-column {
+    flex: 1;
+    margin: 0 10px;
+    border-radius: 8px; 
+    padding: 20px;
+    color: white; 
+}
+
+.to-do {
+    background-color: #2196F3; 
+}
+
+.doing {
+    background-color: #FF9800;
+}
+
+.done {
+    background-color: #4CAF50; 
+}
+
+.trash {
+    background-color: #F44336; 
+}
+
+.kanban-column h2 {
+    text-align: center;
+}
+
+.task-list {
+    min-height: 100px;
+}
+
+.task {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px; 
+    cursor: grab;
+    color: black; 
+}
